@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "extraKnownMarketplaces": {
+    "vercel-aiagent-coding-skill": {
+      "source": {
+        "source": "github",
+        "repo": "FDE-project/vercel-aiagent-coding-skill"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "kickoff@vercel-aiagent-coding-skill": true,
+    "idea-framing@vercel-aiagent-coding-skill": true,
+    "user-research@vercel-aiagent-coding-skill": true,
+    "target-definition@vercel-aiagent-coding-skill": true,
+    "competitive-analysis@vercel-aiagent-coding-skill": true,
+    "kpi-design@vercel-aiagent-coding-skill": true,
+    "spec-writer@vercel-aiagent-coding-skill": true,
+    "app-flow-designer@vercel-aiagent-coding-skill": true,
+    "screen-spec@vercel-aiagent-coding-skill": true,
+    "data-modeler@vercel-aiagent-coding-skill": true,
+    "api-contract@vercel-aiagent-coding-skill": true,
+    "project-bootstrap@vercel-aiagent-coding-skill": true,
+    "project-scaffold@vercel-aiagent-coding-skill": true,
+    "shadcn-ui@vercel-aiagent-coding-skill": true,
+    "image-gen@vercel-aiagent-coding-skill": true,
+    "mockdata-ja@vercel-aiagent-coding-skill": true,
+    "format-ja@vercel-aiagent-coding-skill": true,
+    "ai-feature@vercel-aiagent-coding-skill": true,
+    "firebase-backend@vercel-aiagent-coding-skill": true,
+    "ai-eval@vercel-aiagent-coding-skill": true,
+    "ai-safety-check@vercel-aiagent-coding-skill": true,
+    "design-review@vercel-aiagent-coding-skill": true,
+    "pitch-review@vercel-aiagent-coding-skill": true,
+    "privacy-check@vercel-aiagent-coding-skill": true,
+    "deploy-preflight@vercel-aiagent-coding-skill": true,
+    "smoke-test@vercel-aiagent-coding-skill": true,
+    "vercel-toolbar-loop@vercel-aiagent-coding-skill": true,
+    "vscode-autofix-loop@vercel-aiagent-coding-skill": true,
+    "feedback-triage@vercel-aiagent-coding-skill": true,
+    "analytics-events@vercel-aiagent-coding-skill": true,
+    "experiment-plan@vercel-aiagent-coding-skill": true,
+    "settings-doctor@vercel-aiagent-coding-skill": true,
+    "docs-runbook@vercel-aiagent-coding-skill": true,
+    "observability-setup@vercel-aiagent-coding-skill": true,
+    "perf-check@vercel-aiagent-coding-skill": true,
+    "seo-meta@vercel-aiagent-coding-skill": true,
+    "db-migration@vercel-aiagent-coding-skill": true,
+    "cost-guard@vercel-aiagent-coding-skill": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/session-start.sh",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git switch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr checks:*)",
+      "mcp__vercel__list_projects",
+      "mcp__vercel__list_deployments",
+      "mcp__vercel__get_deployment"
+    ],
+    "deny": ["Bash(git push origin main)", "Bash(git push --force:*)"]
+  }
+}

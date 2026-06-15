@@ -1,0 +1,18 @@
+# 依存の自動更新 (GitHub ネイティブ・鍵不要)。
+# 新バージョンが出ると更新 PR が自動で作られ、Vercel プレビュー + CI が検証する。
+# PR ノイズが気になる場合は interval を "monthly" に下げる。
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # マイナー・パッチはまとめて 1 PR に (メジャーは個別 PR)
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

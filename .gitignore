@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+coverage
+
+# Next.js
+.next/
+out/
+build
+dist
+
+# Production / Vercel
+.vercel
+
+# Env / Secrets
+.env*
+!.env.example
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
+
+# Generated images / assets (大きいファイルは LFS or commit 対象外推奨)
+public/images/_generated/
+
+# Claude local state
+.claude/local/
+.claude/cache/
+
+# 他エージェント用の生成物 (Codex / Antigravity は adapter でローカル生成・非コミット)
+.codex/
+.antigravity/
+.agents/
+.agent/
+
+# OS
+Thumbs.db

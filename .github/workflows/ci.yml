@@ -1,0 +1,42 @@
+# CI: lint / typecheck / build
+# next.config.mjs は ignoreBuildErrors: true (プロト割り切り) で型エラーが
+# ビルドを素通りするため、typecheck step がここでの唯一の防波堤。
+name: CI
+
+# pull_request で PR を検証し、push は main のみ (dev は PR 経由で検証されるため二重実行を避ける)
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Node 20 は 2026-04 で EOL。engines (>=20.9) の範囲内で LTS の 24 を使う
+          node-version: 24
+
+      # package.json の packageManager ピン (pnpm@x.y.z) を採用
+      - name: Enable corepack (pnpm)
+        run: corepack enable
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint & format check (biome)
+        run: pnpm check
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Build
+        run: pnpm build
+        env:
+          # lib/env.ts の本番ガード (NEXT_PUBLIC_APP_URL / VERCEL_* が無いと throw) を
+          # CI ビルドで発火させないための検証用ダミー。実値は Vercel env が持つ
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
