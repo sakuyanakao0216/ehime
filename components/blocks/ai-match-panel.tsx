@@ -103,7 +103,7 @@ export function AiMatchPanel({
               : ins.name.replace(/\s/g, '').slice(0, 1)
             const chatOpen = chatId === ins.id
             return (
-              <article key={ins.id} className="bg-card border p-5">
+              <article key={ins.id} className="lift card-soft p-5">
                 <div className="flex items-start gap-3">
                   <div className="border-foreground/15 text-foreground/80 flex size-11 shrink-0 items-center justify-center rounded-full border text-base font-bold">
                     {avatarChar}

@@ -64,7 +64,7 @@ function FeaturedBanner({ event }: { event: CrossEvent }) {
   const justOpened = done && open && event.joined < event.minToOpen
 
   return (
-    <article className="bg-card grid overflow-hidden border sm:grid-cols-[1.5fr_1fr]">
+    <article className="card-soft grid overflow-hidden sm:grid-cols-[1.5fr_1fr]">
       <div className="p-7 sm:p-9">
         <div className="label text-brand flex items-center gap-2">
           <span className="bg-brand inline-block size-1.5 rounded-full" />
@@ -142,14 +142,14 @@ export function HeroBanner() {
       <FeaturedBanner event={featured} />
 
       {/* 企画中の交流イベント */}
-      <div className="mt-px grid sm:grid-cols-2">
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
         {rest.map((e) => {
           const a = activityById(e.activityId)
           const c = cityById(e.cityId)
           const open = e.joined >= e.minToOpen
           return (
-            <article key={e.id} className="lift bg-card flex items-start gap-3 border p-4">
-              <div className="bg-muted text-foreground/70 flex size-11 shrink-0 items-center justify-center rounded-sm">
+            <article key={e.id} className="lift card-soft flex items-start gap-3 p-4">
+              <div className="bg-muted text-foreground/70 flex size-11 shrink-0 items-center justify-center rounded-xl">
                 {a && <ActivityIcon name={a.icon} className="size-5" />}
               </div>
               <div className="min-w-0 flex-1">

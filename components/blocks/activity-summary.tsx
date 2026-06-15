@@ -16,7 +16,7 @@ export function ActivitySummary() {
   const max = Math.max(...activity.breakdown.map((b) => b.count), 1)
   const weekMax = Math.max(...activity.weekly, 1)
   return (
-    <div className="bg-card border">
+    <div className="card-soft overflow-hidden">
       {/* サマリー帯 */}
       <div className="flex items-center justify-between gap-4 border-b p-5">
         <div>

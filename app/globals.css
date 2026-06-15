@@ -47,7 +47,7 @@
   --chart-3: oklch(0.7 0.1 70);
   --chart-4: oklch(0.55 0.08 150);
   --chart-5: oklch(0.52 0.07 240);
-  --radius: 0.5rem;
+  --radius: 0.875rem;
   --sidebar: oklch(0.99 0.002 80);
   --sidebar-foreground: oklch(0.2 0.008 60);
   --sidebar-primary: oklch(0.22 0.008 60);
@@ -142,10 +142,11 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --radius-sm: calc(var(--radius) - 2px);
-  --radius-md: var(--radius);
-  --radius-lg: calc(var(--radius) + 2px);
-  --radius-xl: calc(var(--radius) + 6px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 10px);
   --font-sans: var(--font-sans);
 }
 
@@ -184,22 +185,50 @@
     font-size: 0.68rem;
     font-weight: 700;
   }
-  /* ヘアラインのホバー反応（控えめ） */
+  /* ホバー反応（今風: やわらかい浮き上がり＋にじむ影） */
   .lift {
     transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      border-color 0.25s ease;
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease,
+      border-color 0.28s ease;
   }
   .lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px -14px oklch(0.5 0.05 50 / 0.45);
-    border-color: oklch(0.72 0.05 50);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px -24px oklch(0.45 0.06 50 / 0.5);
+    border-color: color-mix(in oklch, var(--brand) 35%, var(--border));
   }
   .glass {
     background: color-mix(in oklch, var(--background) 80%, transparent);
     backdrop-filter: blur(12px) saturate(1.1);
     -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  }
+  /* 今風カード: 大きめ角丸＋にじむソフトシャドウ */
+  .card-soft {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    box-shadow:
+      0 1px 2px oklch(0.5 0.03 50 / 0.04),
+      0 16px 36px -26px oklch(0.45 0.06 50 / 0.4);
+  }
+  /* ブランド色のソフトな発光面（アクセント） */
+  .aura-brand {
+    background: radial-gradient(
+      55% 60% at 50% 0%,
+      color-mix(in oklch, var(--brand) 24%, transparent),
+      transparent 72%
+    );
+  }
+  /* 見出しのグラデーション差し色（インク→ブランド） */
+  .text-gradient-brand {
+    background: linear-gradient(
+      100deg,
+      var(--foreground) 30%,
+      color-mix(in oklch, var(--brand) 80%, var(--foreground))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
 
@@ -219,5 +248,30 @@
   }
   .animate-pop {
     animation: pop 0.35s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  }
+
+  /* スクロールで現れるフェードアップ（対応ブラウザのみ。未対応は通常表示） */
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 24%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .animate-pop {
+      animation: none;
+    }
   }
 }

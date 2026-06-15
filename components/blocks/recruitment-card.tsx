@@ -16,9 +16,9 @@ export function RecruitmentCard({
   const city = cityById(recruitment.cityId)
   const matched = recruitment.status === 'マッチ成立'
   return (
-    <article className={cn('bg-card border p-5', className)}>
+    <article className={cn('card-soft p-5', className)}>
       <div className="flex gap-4">
-        <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-sm">
+        <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-xl">
           {act && <ActivityIcon name={act.icon} className="size-6" />}
         </div>
         <div className="min-w-0 flex-1">

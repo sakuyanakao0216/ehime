@@ -7,9 +7,9 @@ export function EventCard({ event }: { event: SportEvent }) {
   const city = cityById(event.cityId)
   const act = activityById(event.activityId)
   return (
-    <article className="lift group bg-card flex gap-4 border-b p-5 last:border-b-0 sm:border sm:border-border">
-      {/* 種目アイコン（ニュートラルな正方形） */}
-      <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-sm">
+    <article className="lift group card-soft flex gap-4 p-5">
+      {/* 種目アイコン */}
+      <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-xl">
         {act && <ActivityIcon name={act.icon} className="size-6" />}
       </div>
 

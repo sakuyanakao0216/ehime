@@ -9,9 +9,9 @@ export function ConnectEventCard({ event }: { event: ConnectEvent }) {
   const city = cityById(event.cityId)
   const act = activityById(event.activityId)
   return (
-    <article className="lift bg-card border p-5">
+    <article className="lift card-soft p-5">
       <div className="flex gap-4">
-        <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-sm">
+        <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-xl">
           {act && <ActivityIcon name={act.icon} className="size-6" />}
         </div>
         <div className="min-w-0 flex-1">

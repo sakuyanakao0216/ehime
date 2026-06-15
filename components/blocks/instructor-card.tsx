@@ -18,7 +18,7 @@ export function InstructorCard({
 }) {
   const city = cityById(instructor.cityId)
   return (
-    <article className={cn('lift bg-card border p-5', className)}>
+    <article className={cn('lift card-soft p-5', className)}>
       <div className="flex items-start gap-3">
         <div className="border-foreground/15 text-foreground/80 flex size-12 shrink-0 items-center justify-center rounded-full border text-lg font-bold">
           {initials(instructor.name)}
