@@ -41,21 +41,20 @@ export const me = {
     { emoji: '🎟️', text: '愛媛FC 自由席 20%OFF' },
     { emoji: '🥤', text: '観戦時ドリンク1杯無料' },
   ],
-  /** ロイヤリティ（再訪を促す仕掛け） */
-  loyalty: {
-    tier: 'シルバー',
-    nextTier: 'ゴールド',
-    /** 次ランクまでの進捗 % */
-    tierProgress: 64,
-    /** 次ランクまでの残りポイント */
-    toNextPoints: 180,
+  /** 自分のスポーツ活動のまとめ（ジム・観戦などの履歴を可視化） */
+  activity: {
+    /** 今月の活動回数 */
+    monthTotal: 14,
     /** 連続活動週 */
     streakWeeks: 5,
+    /** 種別ごとの回数（バー表示） */
+    breakdown: [
+      { key: 'gym', label: 'ジム・トレーニング', count: 6 },
+      { key: 'watch', label: '観戦', count: 4 },
+      { key: 'join', label: 'イベント参加', count: 3 },
+      { key: 'help', label: 'ちょい手伝い', count: 1 },
+    ],
+    /** 直近8週の活動回数（週次バー） */
+    weekly: [2, 1, 3, 2, 4, 3, 5, 4],
   },
-  /** ミッション（達成でポイント） */
-  missions: [
-    { label: '今月イベントに2回参加', current: 1, goal: 2, reward: 50 },
-    { label: 'ちがう種目に1回参加', current: 0, goal: 1, reward: 30 },
-    { label: 'ちょい手伝いを1回', current: 0, goal: 1, reward: 80 },
-  ],
 }

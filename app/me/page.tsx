@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LoyaltyCard } from '@/components/blocks/loyalty-card'
+import { ActivitySummary } from '@/components/blocks/activity-summary'
 import { Stairway } from '@/components/blocks/stairway'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -18,15 +18,14 @@ export default function MyPage() {
           <div className="label text-brand">My Sports</div>
           <h1 className="display mt-1 text-2xl font-bold">マイスポーツ</h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            {me.points} pt ・ 観戦 {me.stats.watched} ・ 参加 {me.stats.joined} ・ 手伝い{' '}
-            {me.stats.helped}
+            観戦 {me.stats.watched} ・ 参加 {me.stats.joined} ・ 手伝い {me.stats.helped}
           </p>
         </div>
       </header>
 
-      {/* ロイヤリティ（ランク・連続・ミッション） */}
+      {/* 自分のスポーツ活動のまとめ */}
       <section className="mb-10">
-        <LoyaltyCard />
+        <ActivitySummary />
       </section>
 
       {/* 好き・得意（嗜好プロファイル） */}
