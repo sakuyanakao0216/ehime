@@ -16,8 +16,8 @@ export default function OperatorPage() {
     <main className="mx-auto max-w-6xl px-4 py-8">
       <RoleBanner
         emoji="🏫"
-        roleLabel="学校・クラブの方"
-        description="宇和島市立 城北中学校 さん、こんにちは。困っている部活に指導者を見つけましょう。"
+        roleLabel="ささえる（学校・クラブ）"
+        description="宇和島市立 城北中学校 さん、こんにちは。困りごとを出すと、県内の指導者候補から広域でつなぎます。"
       />
 
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -27,12 +27,17 @@ export default function OperatorPage() {
             出している募集に、AI がぴったりの指導者を提案します。
           </p>
         </div>
-        <Button asChild className="bg-brand rounded-full text-white">
-          <Link href="/operator/recruit/new">
-            <Plus />
-            新しく募集する
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button asChild variant="outline" className="rounded-full">
+            <Link href="/instructors">候補をさがす</Link>
+          </Button>
+          <Button asChild className="bg-brand rounded-full text-white">
+            <Link href="/operator/recruit/new">
+              <Plus />
+              新しく募集する
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
