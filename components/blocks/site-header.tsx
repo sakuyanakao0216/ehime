@@ -1,78 +1,88 @@
 'use client'
 
+import type { LucideIcon } from 'lucide-react'
+import { CalendarDays, Handshake, School, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-const nav = [
-  { href: '/connect', label: 'つながる', emoji: '🤝' },
-  { href: '/operator', label: 'ささえる', emoji: '🏫' },
+export const NAV: { href: string; label: string; icon: LucideIcon }[] = [
+  { href: '/', label: 'イベント', icon: CalendarDays },
+  { href: '/connect', label: 'つながる', icon: Handshake },
+  { href: '/operator', label: 'ささえる', icon: School },
+  { href: '/me', label: 'マイページ', icon: User },
 ]
+
+function isActive(pathname: string, href: string) {
+  if (href === '/') return pathname === '/'
+  return pathname === href || pathname.startsWith(`${href}/`)
+}
 
 export function SiteHeader() {
   const pathname = usePathname()
   return (
     <header className="sticky top-0 z-40 px-3 pt-3">
       <div className="glass mx-auto flex h-14 max-w-5xl items-center gap-2 rounded-2xl border px-3 shadow-sm">
-        <Link href="/" className="mr-1 flex items-center gap-2 font-bold">
-          <span className="bg-brand flex size-9 items-center justify-center rounded-xl text-lg text-white shadow-sm">
-            🍊
+        <Link href="/" className="mr-1 flex items-center gap-2.5">
+          <span className="bg-brand flex size-8 items-center justify-center rounded-xl font-extrabold text-white shadow-sm">
+            S
           </span>
           <span className="leading-none">
-            <span className="block text-sm">スポえひめ</span>
-            <span className="text-muted-foreground hidden text-[11px] font-normal sm:block">
-              オールえひめ スポーツ
+            <span className="block text-sm font-bold tracking-tight">スポえひめ</span>
+            <span className="text-muted-foreground hidden text-[10px] font-medium tracking-wide sm:block">
+              ALL EHIME SPORTS
             </span>
           </span>
         </Link>
-        <nav className="ml-auto flex items-center gap-1">
-          <NavLink href="/" active={pathname === '/'} emoji="🗓️" label="イベント" />
-          {nav.map((item) => (
-            <NavLink
-              key={item.href}
-              href={item.href}
-              active={pathname === item.href || pathname.startsWith(`${item.href}/`)}
-              emoji={item.emoji}
-              label={item.label}
-            />
-          ))}
-          <Link
-            href="/me"
-            aria-label="マイページ"
-            className={cn(
-              'flex size-9 items-center justify-center rounded-full text-sm font-bold transition-all',
-              pathname === '/me' ? 'bg-brand text-white shadow-sm' : 'bg-muted hover:bg-muted/70',
-            )}
-          >
-            🙂
-          </Link>
+        {/* デスクトップナビ */}
+        <nav className="ml-auto hidden items-center gap-1 sm:flex">
+          {NAV.map((item) => {
+            const active = isActive(pathname, item.href)
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all',
+                  active
+                    ? 'bg-foreground text-background'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-muted',
+                )}
+              >
+                <item.icon className="size-4" />
+                {item.label}
+              </Link>
+            )
+          })}
         </nav>
       </div>
     </header>
   )
 }
 
-function NavLink({
-  href,
-  active,
-  emoji,
-  label,
-}: {
-  href: string
-  active: boolean
-  emoji: string
-  label: string
-}) {
+/** スマホ用の下部タブナビ。 */
+export function BottomNav() {
+  const pathname = usePathname()
   return (
-    <Link
-      href={href}
-      className={cn(
-        'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all',
-        active ? 'bg-brand text-white shadow-sm' : 'hover:bg-muted text-foreground/80',
-      )}
-    >
-      <span className="text-base leading-none">{emoji}</span>
-      <span className="hidden sm:inline">{label}</span>
-    </Link>
+    <nav className="fixed inset-x-0 bottom-0 z-40 sm:hidden">
+      <div className="glass mx-3 mb-3 flex items-center justify-around rounded-2xl border py-1.5 shadow-lg">
+        {NAV.map((item) => {
+          const active = isActive(pathname, item.href)
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                'flex flex-1 flex-col items-center gap-0.5 rounded-xl py-1 text-[10px] font-medium transition-colors',
+                active ? 'text-primary' : 'text-muted-foreground',
+              )}
+            >
+              <item.icon className={cn('size-5', active && 'fill-primary/15')} />
+              {item.label}
+            </Link>
+          )
+        })}
+      </div>
+    </nav>
   )
 }

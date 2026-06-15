@@ -39,7 +39,7 @@ export default function ConnectPage() {
         <aside className="space-y-4">
           <Card className="rounded-2xl">
             <CardHeader>
-              <CardTitle className="text-base">あなたの関わりの階段 🪜</CardTitle>
+              <CardTitle className="text-base">関わりの階段</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Stairway current={me.currentStep} progress={me.progressToNext} />

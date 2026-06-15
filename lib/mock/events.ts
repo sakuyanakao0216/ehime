@@ -24,26 +24,30 @@ export type SportEvent = {
   price: string
 }
 
-/** 簡易地図用の市町ざっくり座標（0-100 キャンバス。愛媛を北東→南西に配置）。 */
+/** 愛媛県シルエット(viewBox 0 0 100 75)上の市町座標。x:0-100 / y:0-75。 */
 export const cityCoords: Record<string, { x: number; y: number }> = {
-  shikokuchuo: { x: 90, y: 16 },
-  niihama: { x: 82, y: 24 },
-  saijo: { x: 73, y: 30 },
-  kamijima: { x: 68, y: 14 },
-  imabari: { x: 60, y: 28 },
-  toon: { x: 56, y: 42 },
-  matsuyama: { x: 47, y: 46 },
-  masaki: { x: 44, y: 51 },
-  tobe: { x: 49, y: 55 },
-  iyo: { x: 42, y: 57 },
-  uchiko: { x: 40, y: 62 },
-  ozu: { x: 35, y: 64 },
-  yawatahama: { x: 27, y: 67 },
-  seiyo: { x: 30, y: 73 },
-  ikata: { x: 17, y: 63 },
-  uwajima: { x: 22, y: 81 },
-  ainan: { x: 15, y: 91 },
+  shikokuchuo: { x: 87, y: 22 },
+  niihama: { x: 79, y: 23 },
+  saijo: { x: 70, y: 26 },
+  kamijima: { x: 64, y: 13 },
+  imabari: { x: 59, y: 24 },
+  toon: { x: 54, y: 30 },
+  matsuyama: { x: 48, y: 32 },
+  masaki: { x: 45, y: 35 },
+  tobe: { x: 49, y: 37 },
+  iyo: { x: 44, y: 38 },
+  uchiko: { x: 41, y: 43 },
+  ozu: { x: 36, y: 46 },
+  yawatahama: { x: 27, y: 48 },
+  ikata: { x: 15, y: 51 },
+  seiyo: { x: 33, y: 53 },
+  uwajima: { x: 28, y: 61 },
+  ainan: { x: 23, y: 69 },
 }
+
+/** 愛媛県のスタイライズした輪郭（佐田岬半島を含む）。viewBox 0 0 100 75。 */
+export const EHIME_PATH =
+  'M96,22 L90,16 L83,19 L76,15 L69,19 L62,16 L57,20 L52,25 L48,29 L45,34 L43,39 L41,43 L33,45 L24,47 L15,49 L7,53 L4,55 L9,56 L18,53 L28,51 L37,49 L39,53 L36,58 L31,63 L26,68 L21,72 L27,65 L36,56 L46,47 L56,39 L66,33 L76,27 L86,22 Z'
 
 export const events: SportEvent[] = [
   {

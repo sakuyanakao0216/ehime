@@ -1,17 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- 広域連携システム (オールえひめ) の仮 favicon。みかんモチーフ。
-       色は globals.css の --primary (みかんオレンジ) 相当。正式ロゴ決定後に差し替える。 -->
-  <rect width="64" height="64" rx="14" fill="#f59e3a" />
-  <!-- みかんの実 -->
-  <circle cx="32" cy="36" r="18" fill="#fb8b1e" stroke="#ffffff" stroke-width="2.5" />
-  <!-- 房の筋 -->
-  <g stroke="#ffffff" stroke-width="1.6" opacity="0.7">
-    <line x1="32" y1="20" x2="32" y2="52" />
-    <line x1="16" y1="36" x2="48" y2="36" />
-    <line x1="21" y1="25" x2="43" y2="47" />
-    <line x1="43" y1="25" x2="21" y2="47" />
-  </g>
-  <!-- ヘタと葉 -->
-  <circle cx="32" cy="18" r="3.4" fill="#3f7d3a" />
-  <path d="M35 16 q9 -5 14 -1 q-6 6 -14 3 z" fill="#4e9d46" />
+  <!-- スポえひめ favicon。オレンジのミニマルなモノグラム（みかん画は使わない）。 -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fb923c" />
+      <stop offset="1" stop-color="#ea580c" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#g)" />
+  <text x="32" y="44" font-family="ui-sans-serif, system-ui, sans-serif" font-size="38" font-weight="800" fill="#ffffff" text-anchor="middle">S</text>
 </svg>

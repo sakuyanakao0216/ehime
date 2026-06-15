@@ -1,24 +1,31 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Handshake, type LucideIcon, School } from 'lucide-react'
 import Link from 'next/link'
 import { EventHub } from '@/components/blocks/event-hub'
 import { cn } from '@/lib/utils'
 
-const wheels = [
+const wheels: {
+  href: string
+  icon: LucideIcon
+  tag: string
+  title: string
+  body: string
+  gradient: string
+}[] = [
   {
     href: '/connect',
-    emoji: '🤝',
+    icon: Handshake,
     tag: 'みんなで',
     title: 'つながる',
     body: '観戦やジム好きのまま、学生のイベントにゆる〜く参加。気づけばスポーツを支える側に。',
-    gradient: 'from-emerald-400 to-teal-500',
+    gradient: 'from-amber-500 to-orange-600',
   },
   {
     href: '/operator',
-    emoji: '🏫',
+    icon: School,
     tag: '学校・クラブ',
     title: 'ささえる',
     body: '「人が集まらない・指導者がいない」を投稿。AI が県内の候補から広域でつなぎます。',
-    gradient: 'from-orange-400 to-rose-500',
+    gradient: 'from-orange-500 to-rose-600',
   },
 ]
 
@@ -26,26 +33,27 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-4 pb-20">
       {/* Hero: スポーツ情報ハブとしての位置づけ */}
-      <section className="relative py-10 text-center sm:py-14">
-        <span className="animate-float pointer-events-none absolute top-4 right-4 text-4xl opacity-80 sm:text-5xl">
-          🍊
-        </span>
-        <div className="bg-brand mb-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm">
-          オールえひめ スポーツ
+      <section className="py-12 sm:py-16">
+        <div className="text-primary mb-4 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
+          <span className="bg-primary inline-block h-px w-6" />
+          All Ehime Sports
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-balance sm:text-5xl">
-          愛媛のスポーツ、
-          <span className="text-brand">ぜんぶここに。</span>
+        <h1 className="max-w-2xl text-4xl leading-[1.1] font-extrabold tracking-tight text-balance sm:text-6xl">
+          愛媛のスポーツが、
+          <br />
+          <span className="text-brand">ひとつになる。</span>
         </h1>
-        <p className="text-muted-foreground mx-auto mt-3 max-w-lg text-base leading-relaxed">
+        <p className="text-muted-foreground mt-5 max-w-lg text-base leading-relaxed sm:text-lg">
           今日のプロ観戦も、地域の体験会も、学校の試合も。
-          見て、行って、お得に楽しむうちに、スポーツを支える仲間になれる。
+          見て、行って、楽しむうちに、スポーツを支える仲間になれる。
         </p>
       </section>
 
       {/* メイン: イベント情報ハブ（リスト＆地図・割引） */}
-      <section className="mb-12">
-        <h2 className="mb-4 text-xl font-bold">スポーツイベントをさがす 🗓️</h2>
+      <section className="mb-16">
+        <div className="mb-4 flex items-end justify-between">
+          <h2 className="text-2xl font-bold tracking-tight">スポーツイベントをさがす</h2>
+        </div>
         <EventHub />
       </section>
 
@@ -64,11 +72,11 @@ export default function Home() {
             >
               <div
                 className={cn(
-                  'mb-3 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br text-3xl shadow-sm',
+                  'mb-3 flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br text-white shadow-sm',
                   w.gradient,
                 )}
               >
-                {w.emoji}
+                <w.icon className="size-6" />
               </div>
               <div className="text-muted-foreground text-xs font-medium">{w.tag}</div>
               <h3 className="text-xl font-bold">{w.title}</h3>

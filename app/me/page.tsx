@@ -42,13 +42,13 @@ export default function MyPage() {
       <div className="grid gap-6 lg:grid-cols-[1fr_320px]">
         {/* 関わりの階段 */}
         <div>
-          <h2 className="mb-1 text-xl font-bold">関わりの階段 🪜</h2>
+          <h2 className="mb-1 text-xl font-bold">関わりの階段</h2>
           <p className="text-muted-foreground mb-4 text-sm">
             観るところから、あなたのペースで。一段あがるたびに、できることが増えます。
           </p>
           <Stairway current={me.currentStep} progress={me.progressToNext} />
           <Button asChild className="bg-brand mt-4 rounded-full text-white">
-            <Link href="/connect">次の一歩をさがす 🤝</Link>
+            <Link href="/connect">次の一歩をさがす</Link>
           </Button>
         </div>
 
@@ -56,7 +56,7 @@ export default function MyPage() {
         <aside className="space-y-5">
           <Card className="rounded-2xl">
             <CardHeader>
-              <CardTitle className="text-base">さいきんの行動 📍</CardTitle>
+              <CardTitle className="text-base">さいきんの行動</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2.5">
               {me.recentActivity.map((a) => (
@@ -76,7 +76,7 @@ export default function MyPage() {
 
           <Card className="rounded-2xl">
             <CardHeader>
-              <CardTitle className="text-base">使える特典 🎟️</CardTitle>
+              <CardTitle className="text-base">使える特典</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
               {me.perks.map((p) => (
