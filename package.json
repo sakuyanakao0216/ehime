@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@ai-sdk/gateway": "^3.0.127",
-    "@vercel/analytics": "^1.4.0",
+    "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^1.1.0",
     "ai": "^6.0.199",
     "clsx": "^2.1.1",
