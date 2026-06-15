@@ -13,24 +13,24 @@
     "check": "biome check ."
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^3.0.127",
+    "@ai-sdk/gateway": "^3.0.131",
     "@vercel/analytics": "^1.4.0",
     "@vercel/speed-insights": "^1.1.0",
-    "ai": "^6.0.199",
+    "ai": "^6.0.205",
     "clsx": "^2.1.1",
-    "next": "^16.0.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.16",
-    "@tailwindcss/postcss": "^4.0.0",
+    "@biomejs/biome": "^2.5.0",
+    "@tailwindcss/postcss": "^4.3.1",
     "@types/node": "^22.10.0",
-    "@types/react": "^19.0.0",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.0.0",
     "postcss": "^8.5.0",
-    "tailwindcss": "^4.0.0",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5.7.0"
   },
   "packageManager": "pnpm@9.15.0",
