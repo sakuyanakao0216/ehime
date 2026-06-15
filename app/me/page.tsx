@@ -47,7 +47,7 @@ export default function MyPage() {
           </div>
           <Stairway current={me.currentStep} progress={me.progressToNext} />
           <Button asChild className="mt-5">
-            <Link href="/connect">次の一歩をさがす</Link>
+            <Link href="/">次の一歩をさがす</Link>
           </Button>
         </div>
 

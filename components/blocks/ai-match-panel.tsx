@@ -1,11 +1,11 @@
 'use client'
 
-import { Check, MapPin, Star } from 'lucide-react'
+import { MapPin, Star } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
+import { ConsultChat } from '@/components/blocks/consult-chat'
 import { Button } from '@/components/ui/button'
 import { cityById } from '@/lib/mock/data'
 import type { Instructor } from '@/lib/mock/types'
-import { cn } from '@/lib/utils'
 
 type MatchCriteria = {
   activityId: string
@@ -26,18 +26,21 @@ type Result = {
 export function AiMatchPanel({
   criteria,
   autoRun = false,
+  anonymous = false,
 }: {
   criteria: MatchCriteria
   autoRun?: boolean
+  /** 募集側ビュー: 実名を伏せ「候補 A/B…」で表示し、相談チャットを開く */
+  anonymous?: boolean
 }) {
   const [results, setResults] = useState<Result[]>([])
   const [source, setSource] = useState<'ai' | 'rule-based' | null>(null)
   const [loading, setLoading] = useState(false)
-  const [requested, setRequested] = useState<string | null>(null)
+  const [chatId, setChatId] = useState<string | null>(null)
 
   const run = useCallback(async () => {
     setLoading(true)
-    setRequested(null)
+    setChatId(null)
     try {
       const res = await fetch('/api/match', {
         method: 'POST',
@@ -93,18 +96,23 @@ export function AiMatchPanel({
           results.map((r, idx) => {
             const ins = r.instructor
             const city = cityById(ins.cityId)
-            const isRequested = requested === ins.id
+            // 募集側ビューは匿名（候補 A/B…）
+            const label = anonymous ? `候補 ${String.fromCharCode(65 + idx)}` : ins.name
+            const avatarChar = anonymous
+              ? String.fromCharCode(65 + idx)
+              : ins.name.replace(/\s/g, '').slice(0, 1)
+            const chatOpen = chatId === ins.id
             return (
               <article key={ins.id} className="bg-card border p-5">
                 <div className="flex items-start gap-3">
                   <div className="border-foreground/15 text-foreground/80 flex size-11 shrink-0 items-center justify-center rounded-full border text-base font-semibold">
-                    {ins.name.replace(/\s/g, '').slice(0, 1)}
+                    {avatarChar}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       {idx === 0 && <span className="label text-brand">Best Match</span>}
                     </div>
-                    <h3 className="font-serif text-base font-semibold">{ins.name}</h3>
+                    <h3 className="font-serif text-base font-semibold">{label}</h3>
                     <p className="text-muted-foreground truncate text-xs">{ins.headline}</p>
                     <div className="text-muted-foreground mt-1 flex items-center gap-3 text-xs">
                       <span className="flex items-center gap-0.5">
@@ -136,19 +144,28 @@ export function AiMatchPanel({
                   ))}
                 </div>
 
-                {isRequested ? (
-                  <div className="animate-pop mt-4 flex items-center gap-1.5 border-t pt-3 text-sm font-medium">
-                    <Check className="text-brand size-4" />
-                    {ins.name}さんに依頼しました。担当者が調整します。
-                  </div>
+                {anonymous ? (
+                  chatOpen ? (
+                    <ConsultChat candidateLabel={label} />
+                  ) : (
+                    <div className="mt-4 flex gap-2">
+                      <Button className="flex-1" onClick={() => setChatId(ins.id)}>
+                        気軽に相談してみる
+                      </Button>
+                    </div>
+                  )
                 ) : (
                   <div className="mt-4 flex gap-2">
-                    <Button className="flex-1" onClick={() => setRequested(ins.id)}>
-                      この指導者に依頼する
+                    <Button
+                      className="flex-1"
+                      onClick={() => setChatId(chatId === ins.id ? null : ins.id)}
+                    >
+                      相談してみる
                     </Button>
                     <Button variant="outline">プロフィール</Button>
                   </div>
                 )}
+                {!anonymous && chatOpen && <ConsultChat candidateLabel={ins.name} />}
               </article>
             )
           })}

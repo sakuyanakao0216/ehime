@@ -23,7 +23,7 @@ export default function OperatorPage() {
         <div>
           <h1 className="font-serif text-2xl font-semibold">あなたの募集</h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            出している募集に、AI がぴったりの指導者を提案します。
+            AI が匿名の候補を提案。気軽に相談してから決められます。
           </p>
         </div>
         <div className="flex gap-2">
@@ -45,6 +45,7 @@ export default function OperatorPage() {
           <RecruitmentCard recruitment={featured} />
           <AiMatchPanel
             autoRun
+            anonymous
             criteria={{
               activityId: featured.activityId,
               region: featured.region,
