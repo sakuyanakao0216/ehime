@@ -1,162 +1,122 @@
-import {
-  ArrowRight,
-  Building2,
-  Citrus,
-  GraduationCap,
-  HeartHandshake,
-  MapPinned,
-  Sparkles,
-  Users,
-  Video,
-} from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { ActivityFeed } from '@/components/blocks/activity-feed'
+import { CategoryGrid } from '@/components/blocks/category-grid'
+import { HowItWorks } from '@/components/blocks/how-it-works'
+import { RecruitmentCard } from '@/components/blocks/recruitment-card'
 import { RegionMeter } from '@/components/blocks/region-meter'
-import { Badge } from '@/components/ui/badge'
+import { RoleChooser } from '@/components/blocks/role-chooser'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { kpis } from '@/lib/mock/data'
+import { kpis, recruitments } from '@/lib/mock/data'
 
-const pillars = [
-  {
-    icon: Sparkles,
-    title: 'AI 広域マッチング',
-    body: '種目・地域・空き時間・オンライン可否から、県全体の人材プールで最適な指導者を提案。なぜ合うかの理由も提示します。',
-  },
-  {
-    icon: GraduationCap,
-    title: '信頼を見える化',
-    body: '県の研修修了・資格・実績・子どもや保護者からの感謝の声を候補に常時表示。「どんな人か分からない不安」を解消します。',
-  },
-  {
-    icon: Video,
-    title: 'オンラインで偏在を解消',
-    body: '東予・南予の専門指導者の空白を、オンライン指導で埋める。子どもがどの地域にいても専門的な指導を受けられます。',
-  },
-]
+const newArrivals = recruitments.filter((r) => r.status === '募集中').slice(0, 4)
 
 export default function Home() {
   return (
-    <main>
+    <main className="mx-auto max-w-6xl px-4 pb-20">
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="from-primary/10 via-background to-accent/30 absolute inset-0 -z-10 bg-gradient-to-br" />
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-          <Badge variant="secondary" className="mb-4 gap-1.5">
-            <Citrus className="size-3.5" />
-            オールえひめ ／ 2026年12月 プロトタイプ
-          </Badge>
-          <h1 className="max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-5xl">
-            こどもたちの機会を守る、
-            <span className="text-primary">全国初</span>のチャレンジ。
-          </h1>
-          <p className="text-muted-foreground mt-5 max-w-2xl text-base leading-relaxed sm:text-lg">
-            部活動・地域クラブの運営者と指導者を、県が主導して
-            <strong className="text-foreground">広域でマッチング</strong>。
-            指導者不足と地域間の偏りを乗り越え、愛媛のどこにいても
-            専門的な指導に出会える仕組みをつくります。
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg">
-              <Link href="/operator">
-                <Building2 />
-                運営者として指導者を探す
-                <ArrowRight />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="/instructors">
-                <Users />
-                指導者を一覧で見る
-              </Link>
-            </Button>
-          </div>
+      <section className="relative py-12 sm:py-16">
+        <span className="animate-float pointer-events-none absolute top-6 right-6 text-5xl opacity-80 sm:text-6xl">
+          🍊
+        </span>
+        <span className="animate-float pointer-events-none absolute top-28 right-24 hidden text-3xl opacity-60 sm:block [animation-delay:1.5s]">
+          🎺
+        </span>
+        <span className="animate-float pointer-events-none absolute top-40 right-2 hidden text-3xl opacity-60 sm:block [animation-delay:0.7s]">
+          ⚽
+        </span>
 
-          {/* KPI */}
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <Stat
-              value={`▲${kpis.decadeClubDecline}+`}
-              label="直近10年の部活動 減少数"
-              tone="text-destructive"
-            />
-            <Stat value={`${kpis.registeredInstructors}名`} label="登録指導者（プロト）" />
-            <Stat value={`${kpis.openRecruitments}件`} label="募集中の部活動・クラブ" />
-            <Stat
-              value={`${kpis.onlineCapableRate}%`}
-              label="オンライン指導に対応"
-              tone="text-info"
-            />
-          </div>
+        <div className="bg-brand mb-5 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white shadow-sm">
+          <Sparkles className="size-3.5" />
+          オールえひめ ／ 部活サポート
+        </div>
+        <h1 className="max-w-2xl text-4xl font-extrabold tracking-tight text-balance sm:text-6xl">
+          困っている部活と、
+          <br className="hidden sm:block" />
+          <span className="text-brand">教えたい人</span>を、サクッと。
+        </h1>
+        <p className="text-muted-foreground mt-5 max-w-xl text-base leading-relaxed sm:text-lg">
+          愛媛のどこにいても、専門の指導者に出会える。
+          学校・クラブは募集を出すだけ、指導者はサッと応募するだけ。 AI
+          が県中からぴったりの相手を見つけます。
+        </p>
+
+        {/* KPI チップ */}
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Chip emoji="🧑‍🏫" text={`指導者 ${kpis.registeredInstructors}名が登録`} />
+          <Chip emoji="📣" text={`いま ${kpis.openRecruitments}件が募集中`} />
+          <Chip emoji="💻" text={`${kpis.onlineCapableRate}% がオンライン対応`} />
         </div>
       </section>
 
-      {/* 課題 */}
-      <section className="mx-auto max-w-6xl px-4 py-12">
-        <Card className="border-destructive/30 bg-destructive/5">
-          <CardContent className="grid gap-6 sm:grid-cols-3">
-            <Problem
-              title="指導者の不足"
-              body="教員が専門外の競技まで顧問を担う形は持続性に欠け、長時間労働の一因に。"
-            />
-            <Problem
-              title="地域間の偏り"
-              body="東予・南予は子どもの減少が著しく、単独校での部活動維持が困難に。"
-            />
-            <Problem
-              title="市町任せの限界"
-              body="小規模市町はシステム構築の予算・事務負担が重く、人材バンクは登録が伸び悩む。"
-            />
-          </CardContent>
-        </Card>
+      {/* 役割選択: 誰が使うアプリかを最初に明確化 */}
+      <section className="mb-14">
+        <h2 className="mb-1 text-center text-2xl font-bold">あなたはどっち？</h2>
+        <p className="text-muted-foreground mb-5 text-center text-sm">
+          タップして、あなたにぴったりの画面へ
+        </p>
+        <RoleChooser />
       </section>
 
-      {/* 解決の柱 */}
-      <section className="mx-auto max-w-6xl px-4 pb-12">
-        <h2 className="mb-2 text-2xl font-bold">広域連携システムの3つの柱</h2>
-        <p className="text-muted-foreground mb-6">
-          「登録して終わり」にしない。県全体で支え合う仕組みへ。
+      {/* コア機能を3ステップで */}
+      <section className="mb-14">
+        <h2 className="mb-1 text-2xl font-bold">どうやってつながるの？</h2>
+        <p className="text-muted-foreground mb-5 text-sm">
+          むずかしい手続きはなし。3 ステップでマッチします。
         </p>
-        <div className="grid gap-4 md:grid-cols-3">
-          {pillars.map((p) => (
-            <Card key={p.title}>
-              <CardContent className="space-y-3">
-                <span className="bg-primary/10 text-primary flex size-11 items-center justify-center rounded-xl">
-                  <p.icon className="size-6" />
-                </span>
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{p.body}</p>
-              </CardContent>
-            </Card>
+        <HowItWorks />
+      </section>
+
+      {/* 種目カテゴリ */}
+      <section className="mb-14">
+        <h2 className="mb-1 text-2xl font-bold">種目からさがす</h2>
+        <p className="text-muted-foreground mb-5 text-sm">
+          気になる種目をタップして、指導者を見てみよう。
+        </p>
+        <CategoryGrid />
+      </section>
+
+      {/* 新着の募集（マーケットの主役フィード） */}
+      <section className="mb-14">
+        <div className="mb-5 flex items-end justify-between">
+          <div>
+            <h2 className="text-2xl font-bold">新着の募集 📣</h2>
+            <p className="text-muted-foreground text-sm">いま指導者をさがしている部活・クラブ</p>
+          </div>
+          <Button asChild variant="outline" size="sm" className="rounded-full">
+            <Link href="/instructor">
+              もっと見る
+              <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {newArrivals.map((r) => (
+            <RecruitmentCard key={r.id} recruitment={r}>
+              <Button size="sm" className="mt-1 w-full rounded-full">
+                くわしく見る
+              </Button>
+            </RecruitmentCard>
           ))}
         </div>
       </section>
 
-      {/* 活性化: フィード + 地域メーター */}
-      <section className="mx-auto max-w-6xl px-4 pb-20">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div>
-            <h2 className="mb-1 flex items-center gap-2 text-xl font-bold">
-              <HeartHandshake className="text-primary size-5" />
-              いま、県内で起きていること
-            </h2>
-            <p className="text-muted-foreground mb-4 text-sm">
-              マッチや感謝がリアルタイムに流れ、関わりたくなる場に。
-            </p>
-            <ActivityFeed />
-          </div>
-          <div>
-            <h2 className="mb-1 flex items-center gap-2 text-xl font-bold">
-              <MapPinned className="text-primary size-5" />
-              地域の盛り上がりメーター
-            </h2>
-            <p className="text-muted-foreground mb-4 text-sm">
-              東予・中予・南予の充足率を可視化。空白地域に重点的に人材を届けます。
-            </p>
-            <Card>
-              <CardContent>
-                <RegionMeter />
-              </CardContent>
-            </Card>
+      {/* 盛り上がり */}
+      <section className="grid gap-6 lg:grid-cols-2">
+        <div>
+          <h2 className="mb-1 text-xl font-bold">いま県内で起きていること 🎉</h2>
+          <p className="text-muted-foreground mb-4 text-sm">
+            マッチや感謝がぞくぞく。見ているだけでワクワク。
+          </p>
+          <ActivityFeed />
+        </div>
+        <div>
+          <h2 className="mb-1 text-xl font-bold">地域の盛り上がりマップ 🗺️</h2>
+          <p className="text-muted-foreground mb-4 text-sm">
+            東予・中予・南予の充足ぐあい。みんなで空白をうめていこう。
+          </p>
+          <div className="bg-card rounded-2xl border p-5 shadow-sm">
+            <RegionMeter />
           </div>
         </div>
       </section>
@@ -164,20 +124,11 @@ export default function Home() {
   )
 }
 
-function Stat({ value, label, tone }: { value: string; label: string; tone?: string }) {
+function Chip({ emoji, text }: { emoji: string; text: string }) {
   return (
-    <div className="bg-card/60 rounded-xl border p-4 backdrop-blur">
-      <div className={`text-2xl font-bold sm:text-3xl ${tone ?? 'text-primary'}`}>{value}</div>
-      <div className="text-muted-foreground mt-1 text-xs leading-tight">{label}</div>
-    </div>
-  )
-}
-
-function Problem({ title, body }: { title: string; body: string }) {
-  return (
-    <div>
-      <h3 className="text-destructive mb-1 font-semibold">{title}</h3>
-      <p className="text-muted-foreground text-sm leading-relaxed">{body}</p>
-    </div>
+    <span className="glass flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium shadow-sm">
+      <span>{emoji}</span>
+      {text}
+    </span>
   )
 }

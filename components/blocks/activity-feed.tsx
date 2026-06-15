@@ -1,23 +1,12 @@
-import type { LucideIcon } from 'lucide-react'
-import { GraduationCap, Handshake, HeartHandshake, UserPlus } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
 import { feed } from '@/lib/mock/data'
 import type { FeedKind } from '@/lib/mock/types'
 import { cn } from '@/lib/utils'
 
-const meta: Record<FeedKind, { icon: LucideIcon; label: string; className: string }> = {
-  match: { icon: Handshake, label: 'マッチ', className: 'text-primary bg-primary/10' },
-  thanks: {
-    icon: HeartHandshake,
-    label: '感謝',
-    className: 'text-destructive bg-destructive/10',
-  },
-  training: {
-    icon: GraduationCap,
-    label: '研修',
-    className: 'text-success bg-success/10',
-  },
-  join: { icon: UserPlus, label: '新規', className: 'text-info bg-info/10' },
+const meta: Record<FeedKind, { emoji: string; className: string }> = {
+  match: { emoji: '🤝', className: 'bg-orange-100 text-orange-600' },
+  thanks: { emoji: '❤️', className: 'bg-rose-100 text-rose-600' },
+  training: { emoji: '🎓', className: 'bg-emerald-100 text-emerald-600' },
+  join: { emoji: '✨', className: 'bg-sky-100 text-sky-600' },
 }
 
 function rel(min: number) {
@@ -25,7 +14,7 @@ function rel(min: number) {
   return `${Math.floor(min / 60)}時間前`
 }
 
-/** 県内のアクティビティフィード（社会的証明・毎日アクセスしたくなる仕掛け）。 */
+/** 県内のアクティビティフィード（見ているだけでワクワクする社会的証明）。 */
 export function ActivityFeed({ className }: { className?: string }) {
   return (
     <div className={cn('space-y-2.5', className)}>
@@ -34,22 +23,20 @@ export function ActivityFeed({ className }: { className?: string }) {
         return (
           <div
             key={item.id}
-            className="bg-card flex items-start gap-3 rounded-lg border p-3 text-sm"
+            className="bg-card lift flex items-start gap-3 rounded-2xl border p-3 text-sm shadow-sm"
           >
             <span
               className={cn(
-                'flex size-8 shrink-0 items-center justify-center rounded-full',
+                'flex size-9 shrink-0 items-center justify-center rounded-full text-lg',
                 m.className,
               )}
             >
-              <m.icon className="size-4" />
+              {m.emoji}
             </span>
             <div className="min-w-0 flex-1">
               <p className="leading-snug">{item.body}</p>
               <div className="text-muted-foreground mt-1 flex items-center gap-2 text-xs">
-                <Badge variant="outline" className="px-1.5 py-0">
-                  {item.region}
-                </Badge>
+                <span className="bg-muted rounded-full px-2 py-0.5">{item.region}</span>
                 <span>{rel(item.minutesAgo)}</span>
               </div>
             </div>

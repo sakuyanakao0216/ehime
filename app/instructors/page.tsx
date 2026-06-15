@@ -3,7 +3,6 @@
 import { Search, Video } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { InstructorCard } from '@/components/blocks/instructor-card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -34,16 +33,13 @@ export default function InstructorsPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
-      <Badge variant="secondary" className="mb-2">
-        指導者をさがす
-      </Badge>
-      <h1 className="mb-1 text-2xl font-bold">県全体の指導者プール</h1>
+      <h1 className="mb-1 text-2xl font-bold">指導者をさがす 🔍</h1>
       <p className="text-muted-foreground mb-6 text-sm">
-        市町の枠を越えて、信頼できる指導者を見つけられます。
+        市町の枠を越えて、愛媛じゅうの先生から選べます。種目・地域でしぼりこみ。
       </p>
 
       {/* フィルタ */}
-      <div className="bg-card mb-6 flex flex-wrap items-end gap-3 rounded-xl border p-4">
+      <div className="bg-card mb-6 flex flex-wrap items-end gap-3 rounded-2xl border p-4 shadow-sm">
         <div className="space-y-1.5">
           <span className="text-muted-foreground text-xs font-medium">種目</span>
           <Select value={activityId} onValueChange={setActivityId}>

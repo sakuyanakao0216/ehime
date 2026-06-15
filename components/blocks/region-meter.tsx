@@ -1,19 +1,15 @@
-import { TrendingUp } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { regionStats } from '@/lib/mock/data'
 import { cn } from '@/lib/utils'
 
-/** 充足率の色分け。低いほど注意色（南予の空白を可視化）。 */
+/** 充足率の色分けと気分（低いほど「みんなで応援しよう」）。 */
 function tone(fill: number) {
-  if (fill >= 70) return { bar: 'bg-success', label: '充実', text: 'text-success' }
-  if (fill >= 50) return { bar: 'bg-warning', label: '要支援', text: 'text-warning' }
-  return { bar: 'bg-destructive', label: '空白あり', text: 'text-destructive' }
+  if (fill >= 70) return { bar: 'bg-emerald-500', label: 'いい感じ', emoji: '😄' }
+  if (fill >= 50) return { bar: 'bg-amber-500', label: 'もう少し', emoji: '🙂' }
+  return { bar: 'bg-rose-500', label: '応援募集中', emoji: '🙏' }
 }
 
-/**
- * 地域の盛り上がりメーター（東予・中予・南予の充足率）。
- * 偏在を一目で示し、県・市町の重点投下の根拠にする。
- */
+/** 地域の盛り上がりマップ（東予・中予・南予）。偏在を一目で示す。 */
 export function RegionMeter({ className }: { className?: string }) {
   return (
     <div className={cn('space-y-4', className)}>
@@ -22,20 +18,19 @@ export function RegionMeter({ className }: { className?: string }) {
         return (
           <div key={s.region}>
             <div className="mb-1.5 flex items-baseline justify-between text-sm">
-              <span className="font-medium">{s.region}</span>
-              <span className={cn('flex items-center gap-1 font-semibold', t.text)}>
-                {s.fillRate}%
-                <span className="text-muted-foreground text-xs font-normal">{t.label}</span>
+              <span className="font-bold">{s.region}</span>
+              <span className="flex items-center gap-1">
+                <span className="font-bold">{s.fillRate}%</span>
+                <span className="text-muted-foreground text-xs">
+                  {t.emoji} {t.label}
+                </span>
               </span>
             </div>
             <Progress value={s.fillRate} indicatorClassName={t.bar} />
             <div className="text-muted-foreground mt-1 flex items-center gap-3 text-xs">
-              <span>募集 {s.recruitments}件</span>
-              <span>指導者 {s.instructors}名</span>
-              <span className="flex items-center gap-0.5">
-                <TrendingUp className="size-3" />
-                30日で{s.recentMatches}件成立
-              </span>
+              <span>📣 募集 {s.recruitments}</span>
+              <span>🧑‍🏫 指導者 {s.instructors}</span>
+              <span>🤝 今月 {s.recentMatches}件</span>
             </div>
           </div>
         )
