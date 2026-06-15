@@ -207,6 +207,69 @@ export const categoryMeta: Record<EventCategory, { emoji: string; className: str
   学校: { emoji: '🏫', className: 'bg-orange-100 text-orange-700' },
 }
 
+// ── 交流イベント（トップバナー: AI が提案する 学生×社会人×プロ の混成イベント）──
+export type ParticipantRole = '学生' | '社会人' | 'プロ'
+
+export type CrossEvent = {
+  id: string
+  title: string
+  activityId: string
+  cityId: string
+  dateLabel: string
+  roles: ParticipantRole[]
+  /** AI が提案した理由（嗜好・行動データ × 地域ニーズ） */
+  aiReason: string
+  /** 一言の見どころ */
+  blurb: string
+  capacity: number
+  joined: number
+  /** 開催が決まる人数ライン（これに達したら「開催決定」＝成立型） */
+  minToOpen: number
+}
+
+export const crossEvents: CrossEvent[] = [
+  {
+    id: 'cx01',
+    title: '3×3 バスケ交流会 — 中学生 × 社会人 × プロ選手',
+    activityId: 'basketball',
+    cityId: 'matsuyama',
+    dateLabel: '6/29(日) 13:00',
+    roles: ['学生', '社会人', 'プロ'],
+    aiReason:
+      'この地域は観戦データと「バスケ好き」の登録が多め。世代を超えて楽しめる場を AI が企画しました。',
+    blurb: 'オレンジバイキングスの選手も参加。経験者も初心者も、混ざって楽しむ半日。',
+    capacity: 40,
+    joined: 29,
+    minToOpen: 30,
+  },
+  {
+    id: 'cx02',
+    title: 'リレーマラソン＆ランニング教室 — みんなで走る',
+    activityId: 'track',
+    cityId: 'matsuyama',
+    dateLabel: '6/22(日) 8:00',
+    roles: ['学生', '社会人'],
+    aiReason: '週末ランの参加履歴が多いエリア。市民ランナーと中高生がチームを組みます。',
+    blurb: 'タイム計測のサポートに回るだけの参加もOK。走らなくても楽しめる。',
+    capacity: 60,
+    joined: 41,
+    minToOpen: 30,
+  },
+  {
+    id: 'cx03',
+    title: '吹奏楽セッション — 学生 × 社会人OB × プロ奏者',
+    activityId: 'brass',
+    cityId: 'uwajima',
+    dateLabel: '6/27(金) 18:30・オンライン可',
+    roles: ['学生', '社会人', 'プロ'],
+    aiReason: '南予は専門指導者が手薄。元吹奏楽部の社会人とプロ奏者を AI がオンラインで橋渡し。',
+    blurb: '画面ごしの参加もOK。久しぶりに楽器を触る大人も歓迎。',
+    capacity: 30,
+    joined: 12,
+    minToOpen: 20,
+  },
+]
+
 // ── つながりイベント（Wheel A: AI が組成する大人×学生×プロ）──────────
 export type ConnectEvent = {
   id: string

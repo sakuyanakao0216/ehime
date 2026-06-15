@@ -1,6 +1,7 @@
 import { ArrowRight, Handshake, type LucideIcon, School } from 'lucide-react'
 import Link from 'next/link'
 import { EventHub } from '@/components/blocks/event-hub'
+import { HeroBanner } from '@/components/blocks/hero-banner'
 
 const wheels: {
   href: string
@@ -29,20 +30,23 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-5xl px-5 pb-24">
       {/* Hero */}
-      <section className="py-16 sm:py-24">
+      <section className="pt-12 pb-10 sm:pt-16">
         <div className="label text-brand mb-5 flex items-center gap-3">
           <span className="bg-brand inline-block h-px w-8" />
           All Ehime Sports
         </div>
-        <h1 className="font-serif max-w-2xl text-4xl leading-[1.18] font-semibold tracking-tight text-balance sm:text-6xl">
-          愛媛のスポーツが、
-          <br />
-          ひとつになる。
+        <h1 className="font-serif max-w-2xl text-3xl leading-[1.18] font-semibold tracking-tight text-balance sm:text-5xl">
+          愛媛のスポーツが、ひとつになる。
         </h1>
-        <p className="text-muted-foreground mt-6 max-w-md text-base leading-relaxed">
-          今日のプロ観戦も、地域の体験会も、学校の試合も。
-          見て、行って、楽しむうちに、スポーツを支える仲間になれる。
+        <p className="text-muted-foreground mt-5 max-w-md text-base leading-relaxed">
+          見て、行って、楽しむうちに、スポーツを支える仲間になれる。 AI
+          が、世代や立場を越えて参加できる場をつくります。
         </p>
+      </section>
+
+      {/* トップバナー: AI が提案する交流イベント（学生×社会人×プロ） */}
+      <section className="mb-20">
+        <HeroBanner />
       </section>
 
       {/* イベント情報ハブ */}
