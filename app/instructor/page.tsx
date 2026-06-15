@@ -2,10 +2,7 @@ import { GraduationCap, MapPin, Star, Video } from 'lucide-react'
 import { ApplyButton } from '@/components/apply-button'
 import { RecruitmentCard } from '@/components/blocks/recruitment-card'
 import { RoleBanner } from '@/components/blocks/role-banner'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
+import { Card, CardContent } from '@/components/ui/card'
 import { activityById, cityById, instructorById, instructors, recruitments } from '@/lib/mock/data'
 import { cn } from '@/lib/utils'
 import { avatarGradient, emojiFor } from '@/lib/visual'
@@ -85,42 +82,20 @@ export default function InstructorPage() {
                 <Stat value={`${me.schoolsSupported}校`} label="活躍" />
                 <Stat value={`${me.yearsExperience}年`} label="指導歴" />
               </div>
-            </CardContent>
-          </Card>
-
-          {/* 研修（安心の見える化） */}
-          <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-base">🎓 研修の受講状況</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <TrainingRow label="指導者きほん研修" done />
-              <TrainingRow label="安全・救急" done />
-              <TrainingRow label="オンライン指導" done />
-              <div>
-                <div className="mb-1 flex justify-between text-sm">
-                  <span>ハラスメント防止</span>
-                  <span className="text-muted-foreground">受講中 60%</span>
-                </div>
-                <Progress value={60} indicatorClassName="bg-amber-500" />
+              {/* 研修は1行サマリで安心を示す */}
+              <div className="flex items-center gap-2 rounded-xl bg-emerald-50 p-2.5 text-xs text-emerald-700">
+                <GraduationCap className="size-4 shrink-0" />
+                県の研修 3つ修了・1つ受講中。安心して任せられます。
               </div>
-              <Button variant="outline" size="sm" className="w-full rounded-full">
-                研修を続ける
-              </Button>
-            </CardContent>
-          </Card>
-
-          {/* 感謝の声 */}
-          <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle className="text-base">💬 とどいた声</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2.5">
-              {me.thanksVoices.map((v) => (
-                <div key={v.body} className="bg-primary/5 rounded-xl p-3 text-sm leading-relaxed">
-                  「{v.body}」<div className="text-muted-foreground mt-0.5 text-xs">— {v.from}</div>
-                </div>
-              ))}
+              {/* とどいた声（1件） */}
+              {me.thanksVoices[0] && (
+                <p className="bg-primary/5 rounded-xl p-3 text-sm leading-relaxed">
+                  💬「{me.thanksVoices[0].body}」
+                  <span className="text-muted-foreground mt-0.5 block text-xs">
+                    — {me.thanksVoices[0].from}
+                  </span>
+                </p>
+              )}
             </CardContent>
           </Card>
         </aside>
@@ -134,22 +109,6 @@ function Stat({ value, label }: { value: string; label: string }) {
     <div className="bg-muted/60 rounded-xl py-2">
       <div className="text-sm font-bold">{value}</div>
       <div className="text-muted-foreground text-[11px]">{label}</div>
-    </div>
-  )
-}
-
-function TrainingRow({ label, done }: { label: string; done?: boolean }) {
-  return (
-    <div className="flex items-center justify-between text-sm">
-      <span>{label}</span>
-      {done ? (
-        <Badge variant="success" className="gap-1">
-          <GraduationCap className="size-3" />
-          修了
-        </Badge>
-      ) : (
-        <Badge variant="outline">未受講</Badge>
-      )}
     </div>
   )
 }

@@ -15,10 +15,11 @@ function rel(min: number) {
 }
 
 /** 県内のアクティビティフィード（見ているだけでワクワクする社会的証明）。 */
-export function ActivityFeed({ className }: { className?: string }) {
+export function ActivityFeed({ className, limit }: { className?: string; limit?: number }) {
+  const items = limit ? feed.slice(0, limit) : feed
   return (
     <div className={cn('space-y-2.5', className)}>
-      {feed.map((item) => {
+      {items.map((item) => {
         const m = meta[item.kind]
         return (
           <div
