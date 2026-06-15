@@ -55,7 +55,9 @@ export default function NewRecruitPage() {
       <Badge variant="secondary" className="mb-2">
         指導者を募集
       </Badge>
-      <h1 className="mb-1 text-2xl font-bold">募集条件を入力すると、AI が候補を提案します</h1>
+      <h1 className="font-serif mb-1 text-2xl font-semibold">
+        募集条件を入力すると、AI が候補を提案します
+      </h1>
       <p className="text-muted-foreground mb-6 text-sm">
         条件を選んで「AI に候補を出してもらう」を押すだけ。県全体の人材プールから探します。
       </p>

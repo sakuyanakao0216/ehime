@@ -1,53 +1,39 @@
-import { Clock, MapPin, Tag } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
+import { ActivityIcon } from '@/components/activity-icon'
 import { activityById, cityById } from '@/lib/mock/data'
-import { categoryMeta, type SportEvent } from '@/lib/mock/events'
-import { cn } from '@/lib/utils'
-import { emojiFor, gradientFor } from '@/lib/visual'
+import type { SportEvent } from '@/lib/mock/events'
 
-/** スポーツイベント1件のカード（観戦・地域・学校 横断）。割引バッジで“お得感”を見せる。 */
+/** エディトリアルなイベントカード（白基調・ヘアライン・明朝タイトル）。 */
 export function EventCard({ event }: { event: SportEvent }) {
-  const cat = categoryMeta[event.category]
   const city = cityById(event.cityId)
   const act = activityById(event.activityId)
   return (
-    <Card className="lift overflow-hidden py-0">
-      <CardContent className="flex gap-0 p-0">
-        <div
-          className={cn(
-            'flex w-16 shrink-0 flex-col items-center justify-center gap-0.5 bg-gradient-to-b text-white sm:w-20',
-            gradientFor(event.activityId),
-          )}
-        >
-          <span className="text-2xl sm:text-3xl">{emojiFor(event.activityId)}</span>
-          <span className="text-[10px] opacity-90">{act?.name}</span>
+    <article className="lift group bg-card flex gap-4 border-b p-5 last:border-b-0 sm:border sm:border-border">
+      {/* 種目アイコン（ニュートラルな正方形） */}
+      <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-sm">
+        {act && <ActivityIcon name={act.icon} className="size-6" />}
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="text-muted-foreground label flex items-center gap-2">
+          <span>{event.category}</span>
+          <span className="bg-border h-3 w-px" />
+          <span className="normal-case tracking-normal">{act?.name}</span>
         </div>
-        <div className="min-w-0 flex-1 space-y-1.5 p-3">
-          <div className="flex items-center gap-1.5">
-            <span className={cn('rounded-full px-2 py-0.5 text-[11px] font-bold', cat.className)}>
-              {cat.emoji} {event.category}
-            </span>
-            <span className="text-muted-foreground text-xs">{event.price}</span>
-          </div>
-          <h3 className="leading-snug font-bold">{event.title}</h3>
-          <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs">
-            <span className="flex items-center gap-0.5">
-              <Clock className="size-3" />
-              {event.dateLabel}
-            </span>
-            <span className="flex items-center gap-0.5">
-              <MapPin className="size-3" />
-              {city?.name}・{event.venue}
-            </span>
-          </div>
-          {event.perk && (
-            <span className="flex w-fit items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-700">
-              <Tag className="size-3" />
-              {event.perk}
-            </span>
-          )}
+        <h3 className="font-serif mt-1 text-lg leading-snug font-semibold">{event.title}</h3>
+        <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-0.5 text-sm">
+          <span>{event.dateLabel}</span>
+          <span>
+            {city?.name}・{event.venue}
+          </span>
+          <span>{event.price}</span>
         </div>
-      </CardContent>
-    </Card>
+        {event.perk && (
+          <p className="text-brand mt-2 flex items-center gap-1.5 text-xs font-medium">
+            <span className="bg-brand size-1.5 rounded-full" />
+            {event.perk}
+          </p>
+        )}
+      </div>
+    </article>
   )
 }

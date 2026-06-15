@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils'
 /** 応募/依頼の主アクション。タップで「完了」状態まで見せ、目的達成を実感させる。 */
 export function ApplyButton({
   label = '応募する',
-  doneLabel = '応募しました！',
+  doneLabel = '応募しました',
   className,
 }: {
   label?: string
@@ -21,21 +21,18 @@ export function ApplyButton({
     return (
       <div
         className={cn(
-          'animate-pop flex items-center justify-center gap-1.5 rounded-full bg-emerald-500 px-4 py-2 text-sm font-bold text-white',
+          'animate-pop flex items-center justify-center gap-1.5 rounded-md border border-foreground/15 bg-muted px-4 py-2 text-sm font-medium',
           className,
         )}
       >
-        <Check className="size-4" />
-        {doneLabel} 🎉
+        <Check className="text-brand size-4" />
+        {doneLabel}
       </div>
     )
   }
 
   return (
-    <Button
-      onClick={() => setDone(true)}
-      className={cn('bg-brand rounded-full text-white', className)}
-    >
+    <Button onClick={() => setDone(true)} className={className}>
       {label}
     </Button>
   )

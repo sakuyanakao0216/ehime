@@ -7,7 +7,6 @@ import { EventMap } from '@/components/blocks/event-map'
 import { activities } from '@/lib/mock/data'
 import { type EventCategory, type EventWhen, events } from '@/lib/mock/events'
 import { cn } from '@/lib/utils'
-import { emojiFor } from '@/lib/visual'
 
 const WHENS: (EventWhen | 'すべて')[] = ['すべて', '今日', '今週末', '今月']
 const CATS: (EventCategory | 'すべて')[] = ['すべて', 'プロ観戦', '地域', '学校']
@@ -46,7 +45,7 @@ export function EventHub() {
             onClick={() => setView('list')}
             className={cn(
               'flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium',
-              view === 'list' ? 'bg-brand text-white' : 'text-muted-foreground',
+              view === 'list' ? 'bg-foreground text-background' : 'text-muted-foreground',
             )}
           >
             <List className="size-4" />
@@ -57,7 +56,7 @@ export function EventHub() {
             onClick={() => setView('map')}
             className={cn(
               'flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium',
-              view === 'map' ? 'bg-brand text-white' : 'text-muted-foreground',
+              view === 'map' ? 'bg-foreground text-background' : 'text-muted-foreground',
             )}
           >
             <MapIcon className="size-4" />
@@ -82,7 +81,7 @@ export function EventHub() {
         </Pill>
         {sportsInUse.map((a) => (
           <Pill key={a.id} active={sport === a.id} onClick={() => setSport(a.id)}>
-            {emojiFor(a.id)} {a.name}
+            {a.name}
           </Pill>
         ))}
       </div>
@@ -117,7 +116,9 @@ function Pill({
       onClick={onClick}
       className={cn(
         'rounded-full border px-3 py-1.5 text-sm font-medium transition-colors',
-        active ? 'bg-brand border-transparent text-white' : 'bg-card hover:bg-muted',
+        active
+          ? 'bg-foreground border-transparent text-background'
+          : 'bg-card hover:border-foreground/40',
       )}
     >
       {children}

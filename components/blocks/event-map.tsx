@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { categoryMeta, EHIME_PATH, eventsWithCoords, type SportEvent } from '@/lib/mock/events'
 import { cn } from '@/lib/utils'
 
-/** カテゴリ別のピン色（落ち着いたトーン）。 */
+/** カテゴリ別のピン色（モノトーン＋差し色）。 */
 const pinColor: Record<string, string> = {
-  プロ観戦: 'bg-violet-500',
-  地域: 'bg-emerald-500',
-  学校: 'bg-orange-500',
+  プロ観戦: 'bg-foreground',
+  地域: 'bg-muted-foreground',
+  学校: 'bg-brand',
 }
 
 /**
@@ -31,7 +31,7 @@ export function EventMap({ events }: { events: SportEvent[] }) {
           <title>愛媛県マップ</title>
           <path
             d={EHIME_PATH}
-            className="fill-orange-100 stroke-orange-300"
+            className="fill-muted stroke-border"
             strokeWidth={0.6}
             strokeLinejoin="round"
           />

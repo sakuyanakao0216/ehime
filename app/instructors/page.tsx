@@ -33,7 +33,7 @@ export default function InstructorsPage() {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="mb-1 text-2xl font-bold">指導者をさがす 🔍</h1>
+      <h1 className="font-serif mb-1 text-2xl font-semibold">指導者をさがす</h1>
       <p className="text-muted-foreground mb-6 text-sm">
         市町の枠を越えて、愛媛じゅうの先生から選べます。種目・地域でしぼりこみ。
       </p>

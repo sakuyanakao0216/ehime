@@ -2,53 +2,47 @@ import { stairway } from '@/lib/mock/me'
 import { cn } from '@/lib/utils'
 
 /**
- * 関わりの階段（Wheel A の中核）。
- * 観る → 参加 → ちょい手伝い → 継続 → 指導者。いまの位置と次の一歩を示す。
+ * 関わりの階段（Wheel A の中核）。観る → 参加 → ちょい手伝い → 継続 → 指導者。
+ * エディトリアルに番号＋ヘアラインで表現。
  */
 export function Stairway({ current, progress }: { current: number; progress?: number }) {
   return (
-    <div className="space-y-2">
+    <ol className="border-border divide-border divide-y border-y">
       {stairway.map((s, i) => {
         const done = i < current
         const now = i === current
         return (
-          <div
+          <li
             key={s.key}
-            className={cn(
-              'flex items-center gap-3 rounded-xl border p-3 transition-colors',
-              now
-                ? 'bg-brand border-transparent text-white shadow-sm'
-                : done
-                  ? 'bg-emerald-50 border-emerald-100'
-                  : 'bg-card opacity-70',
-            )}
+            className={cn('flex items-center gap-3 py-3', !done && !now && 'opacity-45')}
           >
             <span
               className={cn(
-                'flex size-9 shrink-0 items-center justify-center rounded-full text-lg',
-                now ? 'bg-white/25' : 'bg-muted',
+                'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
+                now
+                  ? 'bg-foreground text-background'
+                  : done
+                    ? 'border-brand text-brand border'
+                    : 'border-border text-muted-foreground border',
               )}
             >
-              {s.emoji}
+              {String(i + 1).padStart(2, '0')}
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="font-bold">{s.label}</span>
-                {done && <span className="text-xs text-emerald-600">✓ 達成</span>}
-                {now && <span className="text-xs text-white/90">← いまここ</span>}
+                <span className="text-sm font-semibold">{s.label}</span>
+                {now && <span className="label text-brand">いまここ</span>}
               </div>
-              <p className={cn('text-xs', now ? 'text-white/90' : 'text-muted-foreground')}>
-                {s.desc}
-              </p>
+              <p className="text-muted-foreground text-xs">{s.desc}</p>
               {now && typeof progress === 'number' && (
-                <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-white/30">
-                  <div className="h-full rounded-full bg-white" style={{ width: `${progress}%` }} />
+                <div className="bg-muted mt-1.5 h-1 w-full overflow-hidden rounded-full">
+                  <div className="bg-brand h-full rounded-full" style={{ width: `${progress}%` }} />
                 </div>
               )}
             </div>
-          </div>
+          </li>
         )
       })}
-    </div>
+    </ol>
   )
 }
