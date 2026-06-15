@@ -34,12 +34,12 @@ function OpenGauge({ joined, min }: { joined: number; min: number }) {
     <div>
       <div className="mb-1.5 flex items-baseline justify-between text-sm">
         {open ? (
-          <span className="text-brand flex items-center gap-1 font-semibold">
+          <span className="text-brand flex items-center gap-1 font-bold">
             <Check className="size-4" />
             開催決定
           </span>
         ) : (
-          <span className="font-semibold">あと{min - joined}人で開催</span>
+          <span className="font-bold">あと{min - joined}人で開催</span>
         )}
         <span className="text-muted-foreground text-xs">
           {joined}/{min}人
@@ -70,9 +70,7 @@ function FeaturedBanner({ event }: { event: CrossEvent }) {
           <span className="bg-brand inline-block size-1.5 rounded-full" />
           AI 提案 ・ 集まれば開催
         </div>
-        <h2 className="font-serif mt-3 text-2xl leading-snug font-semibold sm:text-3xl">
-          {event.title}
-        </h2>
+        <h2 className="display mt-3 text-2xl leading-snug font-bold sm:text-3xl">{event.title}</h2>
         <p className="text-muted-foreground mt-3 text-sm leading-relaxed">{event.blurb}</p>
 
         <div className="mt-4">
@@ -126,7 +124,7 @@ function FeaturedBanner({ event }: { event: CrossEvent }) {
         </div>
         <div className="text-center">
           <div className="label text-muted-foreground">Next Event</div>
-          <div className="font-serif mt-1 text-lg font-semibold">{event.dateLabel}</div>
+          <div className="display mt-1 text-lg font-bold">{event.dateLabel}</div>
         </div>
       </div>
     </article>
@@ -155,7 +153,7 @@ export function HeroBanner() {
                 {a && <ActivityIcon name={a.icon} className="size-5" />}
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="font-serif text-sm leading-snug font-semibold">{e.title}</h3>
+                <h3 className="display text-sm leading-snug font-bold">{e.title}</h3>
                 <div className="text-muted-foreground mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs">
                   <span>{e.dateLabel}</span>
                   <span>{c?.name}</span>

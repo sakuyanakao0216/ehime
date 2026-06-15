@@ -18,7 +18,7 @@ export function Stairway({ current, progress }: { current: number; progress?: nu
           >
             <span
               className={cn(
-                'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold',
+                'flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-bold',
                 now
                   ? 'bg-foreground text-background'
                   : done
@@ -30,7 +30,7 @@ export function Stairway({ current, progress }: { current: number; progress?: nu
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold">{s.label}</span>
+                <span className="text-sm font-bold">{s.label}</span>
                 {now && <span className="label text-brand">いまここ</span>}
               </div>
               <p className="text-muted-foreground text-xs">{s.desc}</p>

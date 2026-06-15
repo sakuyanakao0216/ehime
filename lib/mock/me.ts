@@ -41,4 +41,21 @@ export const me = {
     { emoji: '🎟️', text: '愛媛FC 自由席 20%OFF' },
     { emoji: '🥤', text: '観戦時ドリンク1杯無料' },
   ],
+  /** ロイヤリティ（再訪を促す仕掛け） */
+  loyalty: {
+    tier: 'シルバー',
+    nextTier: 'ゴールド',
+    /** 次ランクまでの進捗 % */
+    tierProgress: 64,
+    /** 次ランクまでの残りポイント */
+    toNextPoints: 180,
+    /** 連続活動週 */
+    streakWeeks: 5,
+  },
+  /** ミッション（達成でポイント） */
+  missions: [
+    { label: '今月イベントに2回参加', current: 1, goal: 2, reward: 50 },
+    { label: 'ちがう種目に1回参加', current: 0, goal: 1, reward: 30 },
+    { label: 'ちょい手伝いを1回', current: 0, goal: 1, reward: 80 },
+  ],
 }

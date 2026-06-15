@@ -1,7 +1,8 @@
 'use client'
 
-import { List, MapIcon } from 'lucide-react'
+import { CalendarDays, List, MapIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
+import { EventCalendar } from '@/components/blocks/event-calendar'
 import { EventCard } from '@/components/blocks/event-card'
 import { EventMap } from '@/components/blocks/event-map'
 import { activities } from '@/lib/mock/data'
@@ -15,7 +16,7 @@ export function EventHub() {
   const [when, setWhen] = useState<EventWhen | 'すべて'>('すべて')
   const [cat, setCat] = useState<EventCategory | 'すべて'>('すべて')
   const [sport, setSport] = useState<string>('all')
-  const [view, setView] = useState<'list' | 'map'>('list')
+  const [view, setView] = useState<'list' | 'calendar' | 'map'>('list')
 
   const filtered = useMemo(
     () =>
@@ -40,28 +41,18 @@ export function EventHub() {
           </Pill>
         ))}
         <div className="ml-auto flex rounded-full border p-0.5">
-          <button
-            type="button"
-            onClick={() => setView('list')}
-            className={cn(
-              'flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium',
-              view === 'list' ? 'bg-foreground text-background' : 'text-muted-foreground',
-            )}
-          >
+          <ViewBtn active={view === 'list'} onClick={() => setView('list')}>
             <List className="size-4" />
             リスト
-          </button>
-          <button
-            type="button"
-            onClick={() => setView('map')}
-            className={cn(
-              'flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium',
-              view === 'map' ? 'bg-foreground text-background' : 'text-muted-foreground',
-            )}
-          >
+          </ViewBtn>
+          <ViewBtn active={view === 'calendar'} onClick={() => setView('calendar')}>
+            <CalendarDays className="size-4" />
+            カレンダー
+          </ViewBtn>
+          <ViewBtn active={view === 'map'} onClick={() => setView('map')}>
             <MapIcon className="size-4" />
             地図
-          </button>
+          </ViewBtn>
         </div>
       </div>
 
@@ -88,9 +79,9 @@ export function EventHub() {
 
       <p className="text-muted-foreground text-sm">{filtered.length}件のイベント</p>
 
-      {view === 'map' ? (
-        <EventMap events={filtered} />
-      ) : (
+      {view === 'map' && <EventMap events={filtered} />}
+      {view === 'calendar' && <EventCalendar events={filtered} />}
+      {view === 'list' && (
         <div className="grid gap-3 sm:grid-cols-2">
           {filtered.map((e) => (
             <EventCard key={e.id} event={e} />
@@ -98,6 +89,29 @@ export function EventHub() {
         </div>
       )}
     </div>
+  )
+}
+
+function ViewBtn({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        'flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium',
+        active ? 'bg-foreground text-background' : 'text-muted-foreground',
+      )}
+    >
+      {children}
+    </button>
   )
 }
 

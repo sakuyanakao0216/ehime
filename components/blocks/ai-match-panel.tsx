@@ -67,8 +67,8 @@ export function AiMatchPanel({
       {/* 見出し */}
       <div className="mb-4 flex items-end justify-between border-b pb-3">
         <div>
-          <div className="label text-brand">AI Recommendation</div>
-          <h2 className="font-serif mt-1 text-xl font-semibold">おすすめの指導者</h2>
+          <div className="label text-brand">AI Matching</div>
+          <h2 className="display mt-1 text-xl font-bold">マッチ候補</h2>
         </div>
         <Button onClick={run} disabled={loading} variant="outline" size="sm">
           {loading ? '探しています…' : '再検索'}
@@ -78,7 +78,7 @@ export function AiMatchPanel({
       {source && !loading && (
         <p className="text-muted-foreground mb-4 text-xs">
           {source === 'ai'
-            ? 'AI が県内の指導者から条件に合う候補を選びました'
+            ? 'AI が県内の候補から条件に合う人を選びました'
             : '条件マッチングで候補を選びました'}
         </p>
       )}
@@ -105,14 +105,14 @@ export function AiMatchPanel({
             return (
               <article key={ins.id} className="bg-card border p-5">
                 <div className="flex items-start gap-3">
-                  <div className="border-foreground/15 text-foreground/80 flex size-11 shrink-0 items-center justify-center rounded-full border text-base font-semibold">
+                  <div className="border-foreground/15 text-foreground/80 flex size-11 shrink-0 items-center justify-center rounded-full border text-base font-bold">
                     {avatarChar}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
                       {idx === 0 && <span className="label text-brand">Best Match</span>}
                     </div>
-                    <h3 className="font-serif text-base font-semibold">{label}</h3>
+                    <h3 className="display text-base font-bold">{label}</h3>
                     <p className="text-muted-foreground truncate text-xs">{ins.headline}</p>
                     <div className="text-muted-foreground mt-1 flex items-center gap-3 text-xs">
                       <span className="flex items-center gap-0.5">
@@ -128,7 +128,7 @@ export function AiMatchPanel({
                   </div>
                   {/* マッチ度 */}
                   <div className="text-right">
-                    <div className="font-serif text-3xl leading-none font-semibold">{r.score}</div>
+                    <div className="display text-3xl leading-none font-bold">{r.score}</div>
                     <div className="label text-muted-foreground mt-1">Match</div>
                   </div>
                 </div>

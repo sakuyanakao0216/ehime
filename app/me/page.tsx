@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { LoyaltyCard } from '@/components/blocks/loyalty-card'
 import { Stairway } from '@/components/blocks/stairway'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -10,18 +11,23 @@ export default function MyPage() {
     <main className="mx-auto max-w-5xl px-5 py-10">
       {/* プロフィールヘッダー */}
       <header className="mb-10 flex items-center gap-5 border-b pb-8">
-        <div className="border-foreground/15 flex size-16 shrink-0 items-center justify-center rounded-full border text-2xl font-semibold">
+        <div className="border-foreground/15 flex size-16 shrink-0 items-center justify-center rounded-full border text-2xl font-bold">
           {me.initial}
         </div>
         <div>
           <div className="label text-brand">My Sports</div>
-          <h1 className="font-serif mt-1 text-2xl font-semibold">マイスポーツ</h1>
+          <h1 className="display mt-1 text-2xl font-bold">マイスポーツ</h1>
           <p className="text-muted-foreground mt-1 text-sm">
             {me.points} pt ・ 観戦 {me.stats.watched} ・ 参加 {me.stats.joined} ・ 手伝い{' '}
             {me.stats.helped}
           </p>
         </div>
       </header>
+
+      {/* ロイヤリティ（ランク・連続・ミッション） */}
+      <section className="mb-10">
+        <LoyaltyCard />
+      </section>
 
       {/* 好き・得意（嗜好プロファイル） */}
       <section className="mb-10">
@@ -40,7 +46,7 @@ export default function MyPage() {
         {/* 関わりの階段 */}
         <div>
           <div className="mb-4 border-b pb-3">
-            <h2 className="font-serif text-xl font-semibold">関わりの階段</h2>
+            <h2 className="display text-xl font-bold">関わりの階段</h2>
             <p className="text-muted-foreground mt-1 text-sm">
               観るところから、あなたのペースで。一段あがるたびに、できることが増えます。
             </p>
@@ -55,7 +61,7 @@ export default function MyPage() {
         <aside className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif text-base">さいきんの行動</CardTitle>
+              <CardTitle className="display text-base">さいきんの行動</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {me.recentActivity.map((a) => (
@@ -72,7 +78,7 @@ export default function MyPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="font-serif text-base">使える特典</CardTitle>
+              <CardTitle className="display text-base">使える特典</CardTitle>
             </CardHeader>
             <CardContent className="divide-border divide-y">
               {me.perks.map((p) => (

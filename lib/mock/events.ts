@@ -270,6 +270,65 @@ export const crossEvents: CrossEvent[] = [
   },
 ]
 
+// ── コラボイベント（募集側: 近くの学校・ジム・プロと AI が統合イベントを企画。成立型）──
+export type CollabPartner = '学校' | 'ジム' | 'プロ'
+
+export type CollabEvent = {
+  id: string
+  title: string
+  activityId: string
+  cityId: string
+  dateLabel: string
+  partners: CollabPartner[]
+  /** 匿名のコラボ相手（実名は伏せる） */
+  partnerLabel: string
+  aiReason: string
+  /** 賛同（参加表明）した団体・人数 */
+  joined: number
+  /** 実施が決まるライン */
+  minToOpen: number
+}
+
+export const collabEvents: CollabEvent[] = [
+  {
+    id: 'co01',
+    title: '合同バスケ教室 — 近隣中学 × 地域ジム × プロコーチ',
+    activityId: 'basketball',
+    cityId: 'matsuyama',
+    dateLabel: '7/6(日) 午前',
+    partners: ['学校', 'ジム', 'プロ'],
+    partnerLabel: '近隣中学 B / 市内ジム C / プロクラブ D',
+    aiReason:
+      '半径10km に同種目の部活とジムが集中。単独では人数が足りないため AI が合同案を作成しました。',
+    joined: 4,
+    minToOpen: 6,
+  },
+  {
+    id: 'co02',
+    title: '南予 合同陸上記録会 — 3校合同 × 実業団ランナー',
+    activityId: 'track',
+    cityId: 'uwajima',
+    dateLabel: '7/13(日) 午前',
+    partners: ['学校', 'プロ'],
+    partnerLabel: '南予の中学 3校 / 実業団 E',
+    aiReason: '南予は1校ごとの部員が少なく大会が組みにくい。合同なら記録会が成立します。',
+    joined: 2,
+    minToOpen: 3,
+  },
+  {
+    id: 'co03',
+    title: '吹奏楽 合同パート練習 — 学校 × 地域楽団',
+    activityId: 'brass',
+    cityId: 'ozu',
+    dateLabel: '7/5(土) 午後・オンライン併用',
+    partners: ['学校', 'プロ'],
+    partnerLabel: '大洲の中学 / 地域楽団 F',
+    aiReason: '専門パートの指導者が不足。地域楽団とのコラボで補い合えます。',
+    joined: 3,
+    minToOpen: 3,
+  },
+]
+
 // ── つながりイベント（Wheel A: AI が組成する大人×学生×プロ）──────────
 export type ConnectEvent = {
   id: string

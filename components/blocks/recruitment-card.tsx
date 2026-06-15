@@ -27,7 +27,7 @@ export function RecruitmentCard({
             {recruitment.urgency === '急募' && !matched && <span className="text-brand">急募</span>}
             {matched && <span className="text-muted-foreground">決定済</span>}
           </div>
-          <h3 className="font-serif mt-1 text-lg leading-snug font-semibold">{recruitment.org}</h3>
+          <h3 className="display mt-1 text-lg leading-snug font-bold">{recruitment.org}</h3>
           <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-0.5 text-sm">
             <span>{city?.name}</span>
             <span>{recruitment.requiredDays.join('・')}</span>

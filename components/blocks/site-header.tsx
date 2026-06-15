@@ -1,7 +1,7 @@
 'use client'
 
 import type { LucideIcon } from 'lucide-react'
-import { CalendarDays, ClipboardList, User, Users } from 'lucide-react'
+import { CalendarDays, ClipboardList, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -15,8 +15,7 @@ const PARTICIPANT_NAV: Item[] = [
 ]
 // 募集側（学校・クラブ）向け — 別タブとして分離
 const OPERATOR_NAV: Item[] = [
-  { href: '/operator', label: '募集・候補', icon: ClipboardList },
-  { href: '/instructors', label: '候補をさがす', icon: Users },
+  { href: '/operator', label: '募集ダッシュボード', icon: ClipboardList },
 ]
 
 function isOperatorArea(pathname: string) {
@@ -37,9 +36,7 @@ export function SiteHeader() {
         <Link href={operator ? '/operator' : '/'} className="flex items-center gap-2.5">
           <span className="bg-brand size-2.5 rounded-[2px]" />
           <span className="leading-none">
-            <span className="font-serif block text-base font-semibold tracking-wide">
-              スポえひめ
-            </span>
+            <span className="display block text-base font-bold tracking-wide">スポえひめ</span>
             {operator && (
               <span className="label text-muted-foreground mt-0.5 block">募集ダッシュボード</span>
             )}

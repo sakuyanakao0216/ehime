@@ -14,12 +14,13 @@ export default function Home() {
           <span className="bg-brand inline-block h-px w-8" />
           All Ehime Sports
         </div>
-        <h1 className="font-serif max-w-2xl text-3xl leading-[1.18] font-semibold tracking-tight text-balance sm:text-5xl">
-          愛媛のスポーツが、ひとつになる。
+        <h1 className="display max-w-2xl text-4xl leading-[1.12] font-bold tracking-tight text-balance sm:text-6xl">
+          観る、する、
+          <span className="text-brand">ささえる。</span>
         </h1>
         <p className="text-muted-foreground mt-5 max-w-md text-base leading-relaxed">
-          見て、行って、楽しむうちに、スポーツを支える仲間になれる。 AI
-          が、世代や立場を越えて参加できる場をつくります。
+          愛媛のスポーツイベントが、ぜんぶここに。 見て、行って、楽しむうちに、AI
+          が世代や立場を越えて参加できる場をつくります。
         </p>
       </section>
 
@@ -32,7 +33,7 @@ export default function Home() {
       <section className="mb-20">
         <div className="mb-6 border-b pb-3">
           <div className="label text-muted-foreground">Events</div>
-          <h2 className="font-serif mt-1 text-2xl font-semibold">スポーツイベントをさがす</h2>
+          <h2 className="display mt-1 text-2xl font-bold">スポーツイベントをさがす</h2>
         </div>
         <EventHub />
       </section>
@@ -42,7 +43,7 @@ export default function Home() {
         <div className="mb-6 flex items-end justify-between border-b pb-3">
           <div>
             <div className="label text-brand">AI Recommendation</div>
-            <h2 className="font-serif mt-1 text-2xl font-semibold">あなたへのつながりイベント</h2>
+            <h2 className="display mt-1 text-2xl font-bold">あなたへのつながりイベント</h2>
             <p className="text-muted-foreground mt-1 text-sm">
               「好き・得意」から、AI が“ちょい手伝い”できる場をおすすめ。まずは気軽に。
             </p>

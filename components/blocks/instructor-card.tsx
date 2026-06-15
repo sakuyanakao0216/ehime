@@ -20,11 +20,11 @@ export function InstructorCard({
   return (
     <article className={cn('lift bg-card border p-5', className)}>
       <div className="flex items-start gap-3">
-        <div className="border-foreground/15 text-foreground/80 flex size-12 shrink-0 items-center justify-center rounded-full border text-lg font-semibold">
+        <div className="border-foreground/15 text-foreground/80 flex size-12 shrink-0 items-center justify-center rounded-full border text-lg font-bold">
           {initials(instructor.name)}
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="font-serif text-base font-semibold">{instructor.name}</h3>
+          <h3 className="display text-base font-bold">{instructor.name}</h3>
           <p className="text-muted-foreground truncate text-xs">{instructor.headline}</p>
         </div>
         <span className="text-muted-foreground flex items-center gap-0.5 text-xs">

@@ -19,7 +19,7 @@ export function EventCard({ event }: { event: SportEvent }) {
           <span className="bg-border h-3 w-px" />
           <span className="normal-case tracking-normal">{act?.name}</span>
         </div>
-        <h3 className="font-serif mt-1 text-lg leading-snug font-semibold">{event.title}</h3>
+        <h3 className="display mt-1 text-lg leading-snug font-bold">{event.title}</h3>
         <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-0.5 text-sm">
           <span>{event.dateLabel}</span>
           <span>

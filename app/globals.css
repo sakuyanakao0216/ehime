@@ -4,18 +4,14 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ───────────────────────────────────────────────
-   エディトリアル/プレミアム デザイントークン
-   - 基調: 白 × インク（ほぼ黒）。余白とヘアラインで上質感。
-   - primary（主CTA）: インク。accent/brand: オレンジは“差し色”に限定。
-   - 見出し: 明朝系（font-serif）でラグジュアリーに。
+   Sport Editorial デザイントークン
+   - 基調: 白 × インク（ほぼ黒）＋ オレンジのエネルギー色。
+   - 見出し: 極太サンセリフ（.display）でスポーツ感。数字を主役に。
    ─────────────────────────────────────────────── */
 :root {
   --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans',
     Meiryo, 'Noto Sans JP', sans-serif;
-  /* 明朝系（和文のラグジュアリー表現）。Web フォント不要のシステムスタック。 */
-  --font-serif: 'Hiragino Mincho ProN', 'Yu Mincho', YuMincho, 'Noto Serif JP',
-    'Times New Roman', ui-serif, Georgia, serif;
 
   --background: oklch(0.992 0.002 80);
   --foreground: oklch(0.2 0.008 60);
@@ -29,11 +25,11 @@
   --secondary: oklch(0.965 0.003 80);
   --secondary-foreground: oklch(0.25 0.008 60);
   --muted: oklch(0.965 0.003 80);
-  --muted-foreground: oklch(0.48 0.008 60);
+  --muted-foreground: oklch(0.44 0.008 60);
   --accent: oklch(0.95 0.006 70);
   --accent-foreground: oklch(0.25 0.008 60);
-  /* 差し色のオレンジ（最小限に使用） */
-  --brand: oklch(0.62 0.19 41);
+  /* エネルギー色のオレンジ（スポーツのアクセント） */
+  --brand: oklch(0.64 0.2 42);
   --brand-foreground: oklch(0.99 0.01 80);
   --success: oklch(0.55 0.08 150);
   --success-foreground: oklch(0.99 0.01 150);
@@ -43,15 +39,15 @@
   --warning-foreground: oklch(0.25 0.04 60);
   --destructive: oklch(0.55 0.2 27);
   --destructive-foreground: oklch(0.99 0.01 80);
-  --border: oklch(0.9 0.004 70);
-  --input: oklch(0.9 0.004 70);
-  --ring: oklch(0.62 0.19 41);
+  --border: oklch(0.89 0.004 70);
+  --input: oklch(0.89 0.004 70);
+  --ring: oklch(0.64 0.2 42);
   --chart-1: oklch(0.62 0.19 41);
   --chart-2: oklch(0.45 0.02 60);
   --chart-3: oklch(0.7 0.1 70);
   --chart-4: oklch(0.55 0.08 150);
   --chart-5: oklch(0.52 0.07 240);
-  --radius: 0.3rem;
+  --radius: 0.5rem;
   --sidebar: oklch(0.99 0.002 80);
   --sidebar-foreground: oklch(0.2 0.008 60);
   --sidebar-primary: oklch(0.22 0.008 60);
@@ -151,7 +147,6 @@
   --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 6px);
   --font-sans: var(--font-sans);
-  --font-serif: var(--font-serif);
 }
 
 @layer base {
@@ -167,10 +162,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  /* 明朝の見出しは少し字間を開けて上質に */
-  .font-serif {
-    letter-spacing: 0.02em;
-  }
 }
 
 @layer components {
@@ -182,12 +173,16 @@
   .text-brand {
     color: var(--brand);
   }
-  /* 小さな英字ラベル（資生堂的な uppercase + トラッキング） */
+  /* スポーツ感のある見出し（字間を締める。太さは markup の font-bold 等で指定） */
+  .display {
+    letter-spacing: -0.02em;
+  }
+  /* 小さな英字ラベル（uppercase + トラッキング） */
   .label {
     text-transform: uppercase;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     font-size: 0.68rem;
-    font-weight: 600;
+    font-weight: 700;
   }
   /* ヘアラインのホバー反応（控えめ） */
   .lift {
@@ -197,8 +192,9 @@
       border-color 0.25s ease;
   }
   .lift:hover {
-    box-shadow: 0 1px 0 0 var(--border);
-    border-color: oklch(0.78 0.006 70);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -14px oklch(0.5 0.05 50 / 0.45);
+    border-color: oklch(0.72 0.05 50);
   }
   .glass {
     background: color-mix(in oklch, var(--background) 80%, transparent);
