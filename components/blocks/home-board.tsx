@@ -1,6 +1,7 @@
 'use client'
 
 import { CalendarRange, Handshake } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 import { CollabCard } from '@/components/blocks/collab-card'
 import { EhimeHeatmap } from '@/components/blocks/ehime-heatmap'
@@ -30,7 +31,26 @@ export function HomeBoard() {
   const cols = collabEvents.filter((c) => when === 'すべて' || c.when === when).sort(recoFirst)
 
   return (
-    <div className="pt-8 sm:pt-10">
+    <div className="pt-6 sm:pt-8">
+      {/* ヒーロービジュアル（生成画像） */}
+      <div className="relative mb-8 h-44 overflow-hidden rounded-2xl sm:h-60">
+        <Image
+          src="/images/generated/hero.png"
+          alt="愛媛のスポーツ"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 1024px"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+        <div className="absolute bottom-4 left-5 sm:bottom-5 sm:left-6">
+          <div className="label text-white/85">All Ehime Sports</div>
+          <div className="display mt-1 text-2xl font-bold text-white sm:text-3xl">
+            観る、する、<span className="text-brand">ささえる。</span>
+          </div>
+        </div>
+      </div>
+
       {/* スポーツハイライト（直近の出来事・ニュース） */}
       <HighlightsStrip />
 

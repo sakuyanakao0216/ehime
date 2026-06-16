@@ -1,16 +1,29 @@
+import Image from 'next/image'
 import { ActivityIcon } from '@/components/activity-icon'
 import { activityById, cityById } from '@/lib/mock/data'
-import type { SportEvent } from '@/lib/mock/events'
+import type { EventCategory, SportEvent } from '@/lib/mock/events'
+
+/** カテゴリ別の雰囲気画像（Vertex Imagen 生成）。 */
+const categoryImage: Partial<Record<EventCategory, string>> = {
+  プロ観戦: '/images/generated/kansen.png',
+  地域: '/images/generated/chiiki.png',
+  学校: '/images/generated/gakko.png',
+}
 
 /** エディトリアルなイベントカード（白基調・ヘアライン・明朝タイトル）。 */
 export function EventCard({ event }: { event: SportEvent }) {
   const city = cityById(event.cityId)
   const act = activityById(event.activityId)
+  const img = categoryImage[event.category]
   return (
     <article className="lift group card-soft flex gap-4 p-5">
-      {/* 種目アイコン */}
-      <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-xl">
-        {act && <ActivityIcon name={act.icon} className="size-6" />}
+      {/* カテゴリ画像（なければ種目アイコン） */}
+      <div className="bg-muted text-foreground/70 relative flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl">
+        {img ? (
+          <Image src={img} alt="" fill sizes="64px" className="object-cover" />
+        ) : (
+          act && <ActivityIcon name={act.icon} className="size-6" />
+        )}
       </div>
 
       <div className="min-w-0 flex-1">

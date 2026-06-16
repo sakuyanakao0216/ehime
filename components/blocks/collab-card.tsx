@@ -1,6 +1,7 @@
 'use client'
 
 import { Check } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 import { ActivityIcon } from '@/components/activity-icon'
 import { ConsultChat } from '@/components/blocks/consult-chat'
@@ -41,8 +42,20 @@ export function CollabCard({ event, mine }: { event: CollabEvent; mine?: boolean
   return (
     <article className={cn('lift card-soft p-5', mine && 'ring-brand/30 ring-1')}>
       <div className="flex gap-4">
-        <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-xl">
-          {act && <ActivityIcon name={act.icon} className="size-6" />}
+        <div className="bg-muted text-foreground/70 relative flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl">
+          <Image
+            src="/images/generated/collab.png"
+            alt=""
+            fill
+            sizes="64px"
+            className="object-cover"
+          />
+          {act && (
+            <ActivityIcon
+              name={act.icon}
+              className="text-background absolute right-1 bottom-1 size-4 drop-shadow"
+            />
+          )}
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
