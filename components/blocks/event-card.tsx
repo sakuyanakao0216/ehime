@@ -15,6 +15,11 @@ export function EventCard({ event }: { event: SportEvent }) {
 
       <div className="min-w-0 flex-1">
         <div className="text-muted-foreground label flex items-center gap-2">
+          {event.recommended && (
+            <span className="bg-brand/10 text-brand normal-case tracking-normal rounded-full px-2 py-0.5 text-[10px] font-bold">
+              ★ おすすめ
+            </span>
+          )}
           <span>{event.category}</span>
           <span className="bg-border h-3 w-px" />
           <span className="normal-case tracking-normal">{act?.name}</span>

@@ -5,45 +5,37 @@ import { useState } from 'react'
 import { CollabCard } from '@/components/blocks/collab-card'
 import { EhimeHeatmap } from '@/components/blocks/ehime-heatmap'
 import { EventCard } from '@/components/blocks/event-card'
+import { HighlightsStrip } from '@/components/blocks/highlights-strip'
+import { SocialFeed } from '@/components/blocks/social-feed'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { regionStats } from '@/lib/mock/data'
 import { collabEvents, events } from '@/lib/mock/events'
 import { cn } from '@/lib/utils'
 
 const WHENS = ['すべて', '今日', '今週末', '今月'] as const
 type When = (typeof WHENS)[number]
 
+/** おすすめを先頭に並べる。 */
+const recoFirst = <T extends { recommended?: boolean }>(a: T, b: T) =>
+  Number(!!b.recommended) - Number(!!a.recommended)
+
 /**
  * トップのダッシュボード。
- * 現状サマリ → 時期フィルター → （左）盛り上がり＋偏りヒートマップ／（右）コラボ企画・イベントのタブ。
- * フィルターは地図とタブ内容に連動する。
+ * スポーツハイライト → 時期フィルター →（左）盛り上がり＋偏りヒートマップ／（右）SNS投稿 →
+ * 下に コラボ企画・イベントのタブ。フィルターは地図とタブ内容に連動する。
  */
 export function HomeBoard() {
   const [when, setWhen] = useState<When>('すべて')
 
-  const evs = events.filter((e) => when === 'すべて' || e.when === when)
-  const cols = collabEvents.filter((c) => when === 'すべて' || c.when === when)
-  const avgFill = Math.round(
-    regionStats.reduce((s, r) => s + r.fillRate, 0) / Math.max(1, regionStats.length),
-  )
-  const matches = regionStats.reduce((s, r) => s + r.recentMatches, 0)
+  const evs = events.filter((e) => when === 'すべて' || e.when === when).sort(recoFirst)
+  const cols = collabEvents.filter((c) => when === 'すべて' || c.when === when).sort(recoFirst)
 
   return (
     <div className="pt-8 sm:pt-10">
-      {/* 現状サマリ */}
-      <div className="label text-brand mb-3 flex items-center gap-3">
-        <span className="bg-brand inline-block h-px w-8" />
-        スポえひめ ・ 愛媛全域
-      </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Stat value={evs.length} unit="件" label="イベント" />
-        <Stat value={cols.length} unit="件" label="コラボ企画" />
-        <Stat value={`${avgFill}%`} label="支え手の充足(平均)" />
-        <Stat value={matches} unit="件" label="今月のマッチ" accent />
-      </div>
+      {/* スポーツハイライト（直近の出来事・ニュース） */}
+      <HighlightsStrip />
 
-      {/* 時期フィルター */}
-      <div className="mt-5 flex flex-wrap items-center gap-1.5">
+      {/* 時期フィルター（地図・タブに連動） */}
+      <div className="mt-6 flex flex-wrap items-center gap-1.5">
         <CalendarRange className="text-muted-foreground mr-1 size-4" />
         {WHENS.map((w) => (
           <button
@@ -62,14 +54,25 @@ export function HomeBoard() {
         ))}
       </div>
 
-      {/* 左: 地図 / 右: タブ（フィルター連動） */}
-      <div className="mt-5 grid gap-6 lg:grid-cols-2 lg:items-start">
-        <div className="lg:sticky lg:top-20">
-          <EhimeHeatmap events={evs} />
-        </div>
+      {/* 左: 地図（やや大きめ） / 右: SNS投稿（細長・高さを合わせて内部スクロール） */}
+      <div className="mt-5 grid gap-4 lg:grid-cols-[1.7fr_1fr] lg:items-stretch">
+        <EhimeHeatmap events={evs} />
 
+        <div className="card-soft flex min-h-0 flex-col overflow-hidden p-4">
+          <div className="mb-3 flex shrink-0 items-center gap-2">
+            <span className="label text-brand">みんなの投稿</span>
+            <span className="text-muted-foreground text-xs">X / Instagram</span>
+          </div>
+          <div className="min-h-0 flex-1 overflow-y-auto pr-1">
+            <SocialFeed />
+          </div>
+        </div>
+      </div>
+
+      {/* 下: コラボ企画・イベント（フィルター連動） */}
+      <div className="mt-10">
         <Tabs defaultValue="collab">
-          <TabsList className="mb-4 w-full max-w-xs">
+          <TabsList className="mb-5 w-full max-w-xs">
             <TabsTrigger value="collab" className="flex-1 gap-1.5">
               <Handshake className="size-4" />
               コラボ企画
@@ -82,7 +85,7 @@ export function HomeBoard() {
 
           <TabsContent value="collab">
             {cols.length ? (
-              <div className="space-y-3">
+              <div className="grid gap-4 sm:grid-cols-2">
                 {cols.map((e) => (
                   <CollabCard key={e.id} event={e} />
                 ))}
@@ -94,7 +97,7 @@ export function HomeBoard() {
 
           <TabsContent value="events">
             {evs.length ? (
-              <div className="space-y-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 {evs.map((e) => (
                   <EventCard key={e.id} event={e} />
                 ))}
@@ -105,30 +108,6 @@ export function HomeBoard() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  )
-}
-
-function Stat({
-  value,
-  unit,
-  label,
-  accent,
-}: {
-  value: number | string
-  unit?: string
-  label: string
-  accent?: boolean
-}) {
-  return (
-    <div className="card-soft p-4">
-      <div className="flex items-baseline gap-0.5">
-        <span className={cn('display text-3xl leading-none font-bold', accent && 'text-brand')}>
-          {value}
-        </span>
-        {unit && <span className="text-muted-foreground text-sm font-medium">{unit}</span>}
-      </div>
-      <div className="text-muted-foreground mt-1.5 text-xs">{label}</div>
     </div>
   )
 }

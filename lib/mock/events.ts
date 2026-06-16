@@ -22,6 +22,8 @@ export type SportEvent = {
   perk?: string
   /** 参加/観戦のかんたんな価格表記 */
   price: string
+  /** AI のおすすめ（嗜好に合致）。UI に「おすすめ」マークを出す */
+  recommended?: boolean
 }
 
 /** 愛媛県シルエット(viewBox 0 0 100 75)上の市町座標。x:0-100 / y:0-75。 */
@@ -97,6 +99,7 @@ export const events: SportEvent[] = [
     dateLabel: '本日 19:00',
     perk: '参加無料・道具レンタルあり',
     price: '無料',
+    recommended: true,
   },
   {
     id: 'e05',
@@ -109,6 +112,7 @@ export const events: SportEvent[] = [
     dateLabel: '6/21 8:00',
     perk: '提携カフェ割引',
     price: '¥500',
+    recommended: true,
   },
   {
     id: 'e06',
@@ -289,6 +293,8 @@ export type CollabEvent = {
   joined: number
   /** 実施が決まるライン */
   minToOpen: number
+  /** AI のおすすめ。UI に「おすすめ」マークを出す */
+  recommended?: boolean
 }
 
 export const collabEvents: CollabEvent[] = [
@@ -305,6 +311,7 @@ export const collabEvents: CollabEvent[] = [
       '半径10km に同種目の部活とジムが集中。単独では人数が足りないため AI が合同案を作成しました。',
     joined: 4,
     minToOpen: 6,
+    recommended: true,
   },
   {
     id: 'co02',

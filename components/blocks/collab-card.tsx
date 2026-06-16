@@ -52,6 +52,11 @@ export function CollabCard({ event, mine }: { event: CollabEvent; mine?: boolean
                 企画中
               </span>
             )}
+            {!mine && event.recommended && (
+              <span className="bg-brand/10 text-brand rounded-full px-2 py-0.5 text-[10px] font-bold">
+                ★ おすすめ
+              </span>
+            )}
           </div>
           <h3 className="display mt-1 text-lg leading-snug font-bold">{event.title}</h3>
           <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-0.5 text-sm">
