@@ -63,9 +63,16 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
           style={{ filter: 'drop-shadow(0 1px 3px oklch(0.2 0.03 240 / 0.2))' }}
         >
           <title>愛媛県マップ</title>
+          <defs>
+            <linearGradient id="ehime-land" x1="0.1" y1="0" x2="0.9" y2="1">
+              <stop offset="0" stopColor="var(--card)" />
+              <stop offset="1" stopColor="color-mix(in oklch, var(--brand) 55%, var(--card))" />
+            </linearGradient>
+          </defs>
           <path
             d={EHIME_PATH}
-            className="fill-card stroke-border"
+            className="stroke-brand/30"
+            fill="url(#ehime-land)"
             strokeWidth={0.5}
             strokeLinejoin="round"
           />
