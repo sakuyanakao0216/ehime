@@ -66,7 +66,8 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
           <defs>
             <linearGradient id="ehime-land" x1="0.1" y1="0" x2="0.9" y2="1">
               <stop offset="0" stopColor="var(--card)" />
-              <stop offset="1" stopColor="color-mix(in oklch, var(--brand) 55%, var(--card))" />
+              <stop offset="0.5" stopColor="color-mix(in oklch, var(--brand) 22%, var(--card))" />
+              <stop offset="1" stopColor="color-mix(in oklch, var(--brand) 62%, var(--card))" />
             </linearGradient>
           </defs>
           <path
@@ -81,7 +82,7 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
         {/* ヒート（盛り上がり）: イベント密度で濃淡＋最盛地は脈動 */}
         {blobs.map((b) => {
           const ratio = b.count / maxCount
-          const size = 14 + ratio * 26 // %（コンテナ幅基準）
+          const size = 12 + ratio * 34 // %（コンテナ幅基準）。密度差を大きく
           const hottest = b.count === maxCount
           return (
             <span
@@ -96,8 +97,8 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
                 width: `${size}%`,
                 aspectRatio: '1',
                 background:
-                  'radial-gradient(closest-side, color-mix(in oklch, var(--brand) 60%, transparent), transparent)',
-                opacity: 0.2 + ratio * 0.55,
+                  'radial-gradient(closest-side, color-mix(in oklch, var(--brand) 78%, transparent), transparent 72%)',
+                opacity: 0.3 + ratio * 0.6,
               }}
             />
           )
