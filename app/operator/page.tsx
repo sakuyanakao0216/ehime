@@ -1,4 +1,5 @@
 import { OperatorDashboard } from '@/components/blocks/operator-dashboard'
+import { OrgHeader } from '@/components/blocks/org-header'
 import { RegionMeter } from '@/components/blocks/region-meter'
 import { RoleBanner } from '@/components/blocks/role-banner'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -14,6 +15,8 @@ export default function OperatorPage() {
         roleLabel="募集ダッシュボード ・ 学校・クラブ"
         description="AI のおすすめと検索で、匿名の候補を見つけて気軽に相談できます。"
       />
+
+      <OrgHeader />
 
       <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
         <div>

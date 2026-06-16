@@ -3,7 +3,7 @@
 import { Handshake, Search, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { AiMatchPanel } from '@/components/blocks/ai-match-panel'
-import { CollabCard } from '@/components/blocks/collab-card'
+import { CollabTab } from '@/components/blocks/collab-tab'
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { activities, cities, cityById } from '@/lib/mock/data'
-import { collabEvents } from '@/lib/mock/events'
 import type { Recruitment, Weekday } from '@/lib/mock/types'
 import { cn } from '@/lib/utils'
 
@@ -73,17 +72,9 @@ export function OperatorDashboard({ featured }: { featured: Recruitment }) {
         <SearchPanel />
       </TabsContent>
 
-      {/* コラボ: 近くの学校・ジム・プロとの統合イベント（成立型） */}
+      {/* コラボ: 近くの学校・ジム・プロとの統合イベント（成立型）＋自分で企画 */}
       <TabsContent value="collab">
-        <p className="text-muted-foreground mb-4 text-sm">
-          指導者だけでなく、近くの学校・ジム・プロと AI
-          が統合イベントを企画。賛同が集まれば実施されます。
-        </p>
-        <div className="space-y-4">
-          {collabEvents.map((e) => (
-            <CollabCard key={e.id} event={e} />
-          ))}
-        </div>
+        <CollabTab />
       </TabsContent>
     </Tabs>
   )

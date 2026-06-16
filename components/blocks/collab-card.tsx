@@ -28,7 +28,7 @@ function PartnerChips({ partners }: { partners: CollabPartner[] }) {
 }
 
 /** コラボ: AI が近隣の学校・ジム・プロと統合イベントを企画。賛同が集まれば実施（成立型）。 */
-export function CollabCard({ event }: { event: CollabEvent }) {
+export function CollabCard({ event, mine }: { event: CollabEvent; mine?: boolean }) {
   const [joined, setJoined] = useState(event.joined)
   const [agreed, setAgreed] = useState(false)
   const [chat, setChat] = useState(false)
@@ -39,13 +39,20 @@ export function CollabCard({ event }: { event: CollabEvent }) {
   const pct = Math.min(100, Math.round((joined / event.minToOpen) * 100))
 
   return (
-    <article className="lift card-soft p-5">
+    <article className={cn('lift card-soft p-5', mine && 'ring-brand/30 ring-1')}>
       <div className="flex gap-4">
         <div className="bg-muted text-foreground/70 flex size-14 shrink-0 items-center justify-center rounded-xl">
           {act && <ActivityIcon name={act.icon} className="size-6" />}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="label text-brand">コラボ提案</div>
+          <div className="flex items-center gap-2">
+            <div className="label text-brand">{mine ? 'あなたが企画' : 'コラボ提案'}</div>
+            {mine && (
+              <span className="bg-brand/10 text-brand rounded-full px-2 py-0.5 text-[10px] font-bold">
+                企画中
+              </span>
+            )}
+          </div>
           <h3 className="display mt-1 text-lg leading-snug font-bold">{event.title}</h3>
           <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-0.5 text-sm">
             <span>{city?.name}</span>
