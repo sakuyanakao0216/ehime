@@ -9,9 +9,15 @@ import { activeOrgs } from '@/lib/mock/org'
 export function RegionStatus() {
   return (
     <div className="card-soft overflow-hidden">
-      {/* ヘッダー（地図イラスト） */}
+      {/* ヘッダー（地域の風景） */}
       <div className="relative h-24">
-        <Image src="/images/generated/map.png" alt="" fill sizes="320px" className="object-cover" />
+        <Image
+          src="/images/generated/chiiki.png"
+          alt=""
+          fill
+          sizes="320px"
+          className="object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-black/15" />
         <div className="absolute bottom-3 left-4">
           <div className="label text-white/85">Region</div>
