@@ -1,4 +1,8 @@
+import { MessagesSquare } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { ClubCertification } from '@/components/blocks/club-certification'
+import { Button } from '@/components/ui/button'
 import { activityById, cityById } from '@/lib/mock/data'
 import { myOrg } from '@/lib/mock/org'
 
@@ -48,6 +52,17 @@ export function OrgHeader() {
           </span>
         ))}
         <span className="text-muted-foreground ml-auto hidden text-xs sm:inline">{myOrg.note}</span>
+      </div>
+
+      {/* 認定申請＋情報共有 */}
+      <div className="mt-4 flex flex-wrap items-center gap-2 border-t pt-4">
+        <ClubCertification initial={myOrg.certStatus} />
+        <Button asChild size="sm" variant="outline" className="sm:ml-auto">
+          <Link href="/share">
+            <MessagesSquare className="size-4" />
+            情報共有
+          </Link>
+        </Button>
       </div>
     </div>
   )

@@ -4,6 +4,8 @@
  */
 import type { Region } from './types'
 
+export type CertStatus = '未申請' | '申請中' | '認定済'
+
 export type MyOrg = {
   name: string
   shortName: string
@@ -18,6 +20,8 @@ export type MyOrg = {
   matched: number
   contact: string
   note: string
+  /** 地域クラブ認定の状態 */
+  certStatus: CertStatus
 }
 
 /** 活動的な組織（よく関わり・成立させている学校/クラブ）のピックアップ。 */
@@ -68,4 +72,5 @@ export const myOrg: MyOrg = {
   matched: 1,
   contact: '担当: 教頭・部活動指導員 窓口',
   note: '吹奏楽の専門指導者を急募中（オンライン可）。',
+  certStatus: '未申請',
 }

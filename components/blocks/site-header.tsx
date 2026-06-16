@@ -1,7 +1,7 @@
 'use client'
 
 import type { LucideIcon } from 'lucide-react'
-import { CalendarDays, ClipboardList, User } from 'lucide-react'
+import { CalendarDays, ClipboardList, MessagesSquare, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Logo } from '@/components/brand/logo'
@@ -17,10 +17,13 @@ const PARTICIPANT_NAV: Item[] = [
 // 募集側（学校・クラブ）向け — 別タブとして分離
 const OPERATOR_NAV: Item[] = [
   { href: '/operator', label: '募集ダッシュボード', icon: ClipboardList },
+  { href: '/share', label: '情報共有', icon: MessagesSquare },
 ]
 
 function isOperatorArea(pathname: string) {
-  return pathname.startsWith('/operator') || pathname === '/instructors'
+  return (
+    pathname.startsWith('/operator') || pathname === '/instructors' || pathname.startsWith('/share')
+  )
 }
 function isActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/'
