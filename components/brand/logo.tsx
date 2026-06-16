@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 
 /**
  * スポえひめ ロゴマーク（SVG・スケーラブル）。
- * 暖色グラデの角丸タイルに、立ち上がるアーク＋ボール＝「関わりが上がっていく」動きを象徴。
+ * 暖色グラデの角丸タイルに、瀬戸内海の波＋つながる3つの点（人）＝「地域でつながる」を象徴。
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
@@ -20,17 +20,34 @@ export function LogoMark({ className }: { className?: string }) {
         </linearGradient>
       </defs>
       <rect width="40" height="40" rx="12" fill="url(#spo-logo-g)" />
-      {/* 立ち上がる軌道（関わりの階段＝成長） */}
+      {/* つながり（人が結ばれる） */}
       <path
-        d="M9 29 C 15 30 23 27 29 13"
+        d="M11 16.5 Q20 11 29 16.5"
         fill="none"
         stroke="white"
-        strokeWidth="3"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        opacity="0.9"
+      />
+      <circle cx="11" cy="16.5" r="2.3" fill="white" />
+      <circle cx="20" cy="12" r="2.7" fill="white" />
+      <circle cx="29" cy="16.5" r="2.3" fill="white" />
+      {/* 瀬戸内海の波（二重） */}
+      <path
+        d="M7 27 q4.5 -3 9 0 t9 0 t9 0"
+        fill="none"
+        stroke="white"
+        strokeWidth="2.4"
         strokeLinecap="round"
       />
-      {/* 軌道の起点と到達点 */}
-      <circle cx="9" cy="29" r="2" fill="white" fillOpacity="0.7" />
-      <circle cx="29.5" cy="12.5" r="4.2" fill="white" />
+      <path
+        d="M7 31 q4.5 -2.6 9 0 t9 0 t9 0"
+        fill="none"
+        stroke="white"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        opacity="0.55"
+      />
     </svg>
   )
 }

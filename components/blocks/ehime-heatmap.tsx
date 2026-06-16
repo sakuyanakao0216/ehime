@@ -44,21 +44,28 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
 
   return (
     <div className="card-soft relative overflow-hidden p-3 sm:p-4">
-      <div className="relative aspect-[100/75] w-full overflow-hidden rounded-xl">
-        {/* 瀬戸内海の背景。愛媛のシルエットを「陸地」として浮かせる */}
-        <Image src="/images/generated/sea.png" alt="" fill sizes="640px" className="object-cover" />
+      <div className="bg-muted relative aspect-[100/75] w-full overflow-hidden rounded-xl">
+        {/* 瀬戸内海の背景（さりげなく）。主役は愛媛の地図シルエット */}
+        <Image
+          src="/images/generated/sea.png"
+          alt=""
+          fill
+          sizes="640px"
+          className="object-cover opacity-30"
+        />
+        <div className="bg-background/40 absolute inset-0" />
 
         <svg
           viewBox="0 0 100 75"
           className="absolute inset-0 h-full w-full"
           role="img"
           aria-label="愛媛県のスポーツ盛り上がりマップ"
-          style={{ filter: 'drop-shadow(0 2px 5px oklch(0.2 0.05 240 / 0.35))' }}
+          style={{ filter: 'drop-shadow(0 1px 3px oklch(0.2 0.03 240 / 0.2))' }}
         >
           <title>愛媛県マップ</title>
           <path
             d={EHIME_PATH}
-            className="fill-card stroke-brand/40"
+            className="fill-card stroke-border"
             strokeWidth={0.5}
             strokeLinejoin="round"
           />
