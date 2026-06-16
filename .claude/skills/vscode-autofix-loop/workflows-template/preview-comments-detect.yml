@@ -1,0 +1,50 @@
+# preview-comments-detect.yml — サンプル（vscode-autofix-loop の設計提案）
+#
+# Vercel の "Preview Comments" check が failure（未解決の Toolbar コメントあり）に
+# なったのを検知し、repository_dispatch で通知を打つ。ローカル daemon / VS Code 拡張が
+# これを受けて手動1クリックで /toolbar-pull を起動する設計。
+# 実際の check 名・ペイロードは環境で異なるため、導入時に調整すること。
+#
+# 設置先: 利用側プロジェクトの .github/workflows/ にコピーして使う。
+
+name: preview-comments-detect
+
+on:
+  # Vercel 連携の check 完了時に走らせる
+  check_suite:
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Detect unresolved Vercel preview comments
+        id: detect
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // 当該 SHA の check-runs から "Preview Comments" の失敗を探す
+            const sha = context.payload.check_suite?.head_sha ?? context.sha
+            const { data } = await github.rest.checks.listForRef({
+              owner: context.repo.owner, repo: context.repo.repo, ref: sha,
+            })
+            const failed = data.check_runs.find(
+              c => /preview comments/i.test(c.name) && c.conclusion === 'failure'
+            )
+            core.setOutput('failed', failed ? 'true' : 'false')
+            if (failed) core.setOutput('sha', sha)
+
+      - name: Dispatch notification
+        if: steps.detect.outputs.failed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // ローカル daemon / 拡張が listen する repository_dispatch を発火
+            await github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner, repo: context.repo.repo,
+              event_type: 'toolbar-comments-unresolved',
+              client_payload: { sha: '${{ steps.detect.outputs.sha }}' },
+            })

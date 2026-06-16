@@ -1,0 +1,27 @@
+{
+  "$schema": "https://claude.ai/schemas/settings.json",
+  "extraKnownMarketplaces": {
+    "broken-mp": {
+      "source": "github",
+      "repo": "owner/repo"
+    },
+    "no-source-mp": {
+      "repo": "owner/repo"
+    }
+  },
+  "hooks": {
+    "SessionStart": [
+      { "type": "command", "command": ".claude/hooks/start.sh", "mode": "sync" }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          { "type": "command", "command": ".claude/hooks/post.sh", "timeout": 60000 }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "kickoff": true
+  }
+}
