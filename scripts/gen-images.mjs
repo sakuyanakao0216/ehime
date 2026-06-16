@@ -29,9 +29,9 @@ const NO_TEXT =
 
 const SPECS = [
   {
-    key: 'map',
+    key: 'sea',
     aspectRatio: '4:3',
-    prompt: `Stylized illustrated top-down map of a long horizontal Japanese coastal prefecture with soft warm mikan-orange and cream tones, gentle hills, coastline and small islands, subtle sport motifs (a tiny stadium, a running path, a music note, a ball) dotted across regions, flat modern editorial illustration, soft paper texture. No text, no labels, no logos.`,
+    prompt: `Aerial photo of the calm Seto Inland Sea with a few small forested islands, gentle ripples, soft warm late-afternoon light, teal and blue water. No text, no logos, no people.`,
   },
   {
     key: 'hero',
