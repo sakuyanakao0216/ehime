@@ -1,20 +1,15 @@
 import Image from 'next/image'
 import { ActivityIcon } from '@/components/activity-icon'
+import { activityImage, categoryImage } from '@/lib/activity-images'
 import { activityById, cityById } from '@/lib/mock/data'
-import type { EventCategory, SportEvent } from '@/lib/mock/events'
-
-/** カテゴリ別の雰囲気画像（Vertex Imagen 生成）。 */
-const categoryImage: Partial<Record<EventCategory, string>> = {
-  プロ観戦: '/images/generated/kansen.png',
-  地域: '/images/generated/chiiki.png',
-  学校: '/images/generated/gakko.png',
-}
+import type { SportEvent } from '@/lib/mock/events'
 
 /** エディトリアルなイベントカード（白基調・ヘアライン・明朝タイトル）。 */
 export function EventCard({ event }: { event: SportEvent }) {
   const city = cityById(event.cityId)
   const act = activityById(event.activityId)
-  const img = categoryImage[event.category]
+  // 種目に該当する画像を優先（吹奏楽→吹奏楽の画像）。なければカテゴリ画像。
+  const img = activityImage[event.activityId] ?? categoryImage[event.category]
   return (
     <article className="lift group card-soft flex gap-4 p-5">
       {/* カテゴリ画像（なければ種目アイコン） */}

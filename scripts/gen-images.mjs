@@ -29,6 +29,11 @@ const NO_TEXT =
 
 const SPECS = [
   {
+    key: 'map',
+    aspectRatio: '4:3',
+    prompt: `Stylized illustrated top-down map of a long horizontal Japanese coastal prefecture with soft warm mikan-orange and cream tones, gentle hills, coastline and small islands, subtle sport motifs (a tiny stadium, a running path, a music note, a ball) dotted across regions, flat modern editorial illustration, soft paper texture. No text, no labels, no logos.`,
+  },
+  {
     key: 'hero',
     aspectRatio: '16:9',
     prompt: `Wide cinematic photo collage evoking community sports across a Japanese seaside prefecture. Diverse adults: a cheering stadium crowd, a runner on a coastal path, a brass band practicing, people playing basketball in a gym. ${NO_TEXT}`,
@@ -52,6 +57,36 @@ const SPECS = [
     key: 'collab',
     aspectRatio: '1:1',
     prompt: `Editorial photo of an adult basketball practice in a gym, candid, motion, warm light. ${NO_TEXT}`,
+  },
+  {
+    key: 'school',
+    aspectRatio: '16:9',
+    prompt: `Stylized exterior of a modest Japanese public junior-high school building with a sports ground and trees, warm afternoon light, calm editorial photo. No people. ${NO_TEXT}`,
+  },
+  {
+    key: 'mypage',
+    aspectRatio: '16:9',
+    prompt: `Warm sports lifestyle flat-lay on a wooden table: running shoes, a water bottle, a stopwatch and an event ticket stub, soft mikan-orange morning light, editorial. No people. ${NO_TEXT}`,
+  },
+  {
+    key: 'coach',
+    aspectRatio: '1:1',
+    prompt: `An adult sports coach guiding a practice, seen from behind, warm gym light, candid, motion. ${NO_TEXT}`,
+  },
+  {
+    key: 'soccer',
+    aspectRatio: '1:1',
+    prompt: `Adults playing soccer on a community pitch at golden hour, back views and silhouettes, warm tones. ${NO_TEXT}`,
+  },
+  {
+    key: 'baseball',
+    aspectRatio: '1:1',
+    prompt: `Amateur baseball practice on a local ground at golden hour, back view, warm tones. ${NO_TEXT}`,
+  },
+  {
+    key: 'volleyball',
+    aspectRatio: '1:1',
+    prompt: `Indoor volleyball practice in a gym, adults, motion, warm light, back view. ${NO_TEXT}`,
   },
 ]
 

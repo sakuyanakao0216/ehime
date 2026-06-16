@@ -20,6 +20,43 @@ export type MyOrg = {
   note: string
 }
 
+/** 活動的な組織（よく関わり・成立させている学校/クラブ）のピックアップ。 */
+export type ActiveOrg = {
+  id: string
+  name: string
+  region: Region
+  activityId: string
+  note: string
+  recentMatches: number
+}
+
+export const activeOrgs: ActiveOrg[] = [
+  {
+    id: 'ao1',
+    name: '松山市立 道後中学校 卓球部',
+    region: '中予',
+    activityId: 'tabletennis',
+    note: '相談から成立までが早い',
+    recentMatches: 5,
+  },
+  {
+    id: 'ao2',
+    name: '今治市立 北郷中学校 サッカー部',
+    region: '東予',
+    activityId: 'soccer',
+    note: 'コラボ常連',
+    recentMatches: 3,
+  },
+  {
+    id: 'ao3',
+    name: '宇和島市立 城北中学校 吹奏楽部',
+    region: '南予',
+    activityId: 'brass',
+    note: 'オンライン指導を活用',
+    recentMatches: 2,
+  },
+]
+
 export const myOrg: MyOrg = {
   name: '宇和島市立 城北中学校',
   shortName: '城北中',

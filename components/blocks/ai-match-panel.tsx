@@ -1,9 +1,11 @@
 'use client'
 
 import { MapPin, Star } from 'lucide-react'
+import Image from 'next/image'
 import { useCallback, useEffect, useState } from 'react'
 import { ConsultChat } from '@/components/blocks/consult-chat'
 import { Button } from '@/components/ui/button'
+import { COACH_IMAGE, imageForActivity } from '@/lib/activity-images'
 import { cityById } from '@/lib/mock/data'
 import type { Instructor } from '@/lib/mock/types'
 
@@ -102,11 +104,15 @@ export function AiMatchPanel({
               ? String.fromCharCode(65 + idx)
               : ins.name.replace(/\s/g, '').slice(0, 1)
             const chatOpen = chatId === ins.id
+            const candImg = imageForActivity(ins.specialties[0]) ?? COACH_IMAGE
             return (
               <article key={ins.id} className="lift card-soft p-5">
                 <div className="flex items-start gap-3">
-                  <div className="border-foreground/15 text-foreground/80 flex size-11 shrink-0 items-center justify-center rounded-full border text-base font-bold">
-                    {avatarChar}
+                  <div className="border-foreground/15 relative size-11 shrink-0 overflow-hidden rounded-full border">
+                    <Image src={candImg} alt="" fill sizes="44px" className="object-cover" />
+                    <span className="absolute inset-0 flex items-center justify-center bg-black/35 text-base font-bold text-white">
+                      {avatarChar}
+                    </span>
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">

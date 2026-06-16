@@ -1,4 +1,4 @@
-import { School } from 'lucide-react'
+import Image from 'next/image'
 import { activityById, cityById } from '@/lib/mock/data'
 import { myOrg } from '@/lib/mock/org'
 
@@ -9,8 +9,14 @@ export function OrgHeader() {
     <div className="card-soft mb-6 p-5 sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-4">
-          <div className="bg-brand/10 text-brand ring-brand/15 flex size-12 shrink-0 items-center justify-center rounded-xl ring-1">
-            <School className="size-6" />
+          <div className="ring-border relative size-14 shrink-0 overflow-hidden rounded-xl ring-1">
+            <Image
+              src="/images/generated/school.png"
+              alt=""
+              fill
+              sizes="56px"
+              className="object-cover"
+            />
           </div>
           <div className="min-w-0">
             <div className="label text-muted-foreground">My Organization</div>

@@ -4,6 +4,7 @@ import type { LucideIcon } from 'lucide-react'
 import { CalendarDays, ClipboardList, User } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Logo } from '@/components/brand/logo'
 import { cn } from '@/lib/utils'
 
 type Item = { href: string; label: string; icon: LucideIcon }
@@ -33,14 +34,11 @@ export function SiteHeader() {
   return (
     <header className="glass sticky top-0 z-40 border-b">
       <div className="mx-auto flex h-16 max-w-5xl items-center px-5">
-        <Link href={operator ? '/operator' : '/'} className="flex items-center gap-2.5">
-          <span className="bg-brand size-2.5 rounded-[2px]" />
-          <span className="leading-none">
-            <span className="display block text-base font-bold tracking-wide">スポえひめ</span>
-            {operator && (
-              <span className="label text-muted-foreground mt-0.5 block">募集ダッシュボード</span>
-            )}
-          </span>
+        <Link href={operator ? '/operator' : '/'} className="flex items-center gap-2">
+          <Logo />
+          {operator && (
+            <span className="label text-muted-foreground hidden sm:block">募集ダッシュボード</span>
+          )}
         </Link>
 
         <nav className="ml-auto hidden items-center gap-7 sm:flex">

@@ -8,6 +8,7 @@ import { EhimeHeatmap } from '@/components/blocks/ehime-heatmap'
 import { EventCard } from '@/components/blocks/event-card'
 import { HighlightsStrip } from '@/components/blocks/highlights-strip'
 import { SocialFeed } from '@/components/blocks/social-feed'
+import { Logo } from '@/components/brand/logo'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { collabEvents, events } from '@/lib/mock/events'
 import { cn } from '@/lib/utils'
@@ -42,12 +43,9 @@ export function HomeBoard() {
           sizes="(max-width: 1024px) 100vw, 1024px"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
         <div className="absolute bottom-4 left-5 sm:bottom-5 sm:left-6">
-          <div className="label text-white/85">All Ehime Sports</div>
-          <div className="display mt-1 text-2xl font-bold text-white sm:text-3xl">
-            観る、する、<span className="text-brand">ささえる。</span>
-          </div>
+          <Logo className="text-white" markClassName="size-9" />
         </div>
       </div>
 
@@ -104,6 +102,10 @@ export function HomeBoard() {
           </TabsList>
 
           <TabsContent value="collab">
+            <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+              一校・一団体だけでは人数や専門性が足りない活動を、AI
+              が近くの学校・ジム・プロと結びつけて合同で実現します。賛同が集まれば開催が決定する「成立型」。気軽に賛同・相談できます。
+            </p>
             {cols.length ? (
               <div className="grid gap-4 sm:grid-cols-2">
                 {cols.map((e) => (

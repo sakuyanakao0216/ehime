@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 import { cities, regionStats } from '@/lib/mock/data'
 import { cityCoords, EHIME_PATH, eventsWithCoords, type SportEvent } from '@/lib/mock/events'
@@ -43,6 +44,10 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
 
   return (
     <div className="card-soft relative overflow-hidden p-3 sm:p-4">
+      {/* 生成した地図イラストを淡く敷く（テクスチャ） */}
+      <Image src="/images/generated/map.png" alt="" fill className="object-cover" />
+      <div className="bg-background/70 absolute inset-0" />
+
       <div className="relative aspect-[100/75] w-full">
         <svg
           viewBox="0 0 100 75"
@@ -130,7 +135,7 @@ export function EhimeHeatmap({ events }: { events: SportEvent[] }) {
       </div>
 
       {/* 凡例 */}
-      <div className="text-muted-foreground mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-1 text-xs">
+      <div className="text-muted-foreground relative mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 px-1 text-xs">
         <span className="flex items-center gap-1.5">
           <span
             className="inline-block size-3 rounded-full"

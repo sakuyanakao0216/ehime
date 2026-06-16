@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { ActivityIcon } from '@/components/activity-icon'
 import { ConsultChat } from '@/components/blocks/consult-chat'
 import { Button } from '@/components/ui/button'
+import { imageForActivity } from '@/lib/activity-images'
 import { activityById, cityById } from '@/lib/mock/data'
 import type { CollabEvent, CollabPartner } from '@/lib/mock/events'
 import { cn } from '@/lib/utils'
@@ -35,6 +36,7 @@ export function CollabCard({ event, mine }: { event: CollabEvent; mine?: boolean
   const [chat, setChat] = useState(false)
   const act = activityById(event.activityId)
   const city = cityById(event.cityId)
+  const img = imageForActivity(event.activityId)
   const open = joined >= event.minToOpen
   const justOpened = agreed && open && event.joined < event.minToOpen
   const pct = Math.min(100, Math.round((joined / event.minToOpen) * 100))
@@ -43,18 +45,18 @@ export function CollabCard({ event, mine }: { event: CollabEvent; mine?: boolean
     <article className={cn('lift card-soft p-5', mine && 'ring-brand/30 ring-1')}>
       <div className="flex gap-4">
         <div className="bg-muted text-foreground/70 relative flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-xl">
-          <Image
-            src="/images/generated/collab.png"
-            alt=""
-            fill
-            sizes="64px"
-            className="object-cover"
-          />
-          {act && (
-            <ActivityIcon
-              name={act.icon}
-              className="text-background absolute right-1 bottom-1 size-4 drop-shadow"
-            />
+          {img ? (
+            <>
+              <Image src={img} alt="" fill sizes="64px" className="object-cover" />
+              {act && (
+                <ActivityIcon
+                  name={act.icon}
+                  className="text-background absolute right-1 bottom-1 size-4 drop-shadow"
+                />
+              )}
+            </>
+          ) : (
+            act && <ActivityIcon name={act.icon} className="size-6" />
           )}
         </div>
         <div className="min-w-0 flex-1">
