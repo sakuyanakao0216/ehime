@@ -279,6 +279,8 @@ export type CollabEvent = {
   activityId: string
   cityId: string
   dateLabel: string
+  /** 時期フィルター用 */
+  when?: EventWhen
   partners: CollabPartner[]
   /** 匿名のコラボ相手（実名は伏せる） */
   partnerLabel: string
@@ -296,6 +298,7 @@ export const collabEvents: CollabEvent[] = [
     activityId: 'basketball',
     cityId: 'matsuyama',
     dateLabel: '7/6(日) 午前',
+    when: '今週末',
     partners: ['学校', 'ジム', 'プロ'],
     partnerLabel: '近隣中学 B / 市内ジム C / プロクラブ D',
     aiReason:
@@ -309,6 +312,7 @@ export const collabEvents: CollabEvent[] = [
     activityId: 'track',
     cityId: 'uwajima',
     dateLabel: '7/13(日) 午前',
+    when: '今月',
     partners: ['学校', 'プロ'],
     partnerLabel: '南予の中学 3校 / 実業団 E',
     aiReason: '南予は1校ごとの部員が少なく大会が組みにくい。合同なら記録会が成立します。',
@@ -321,6 +325,7 @@ export const collabEvents: CollabEvent[] = [
     activityId: 'brass',
     cityId: 'ozu',
     dateLabel: '7/5(土) 午後・オンライン併用',
+    when: '今週末',
     partners: ['学校', 'プロ'],
     partnerLabel: '大洲の中学 / 地域楽団 F',
     aiReason: '専門パートの指導者が不足。地域楽団とのコラボで補い合えます。',
