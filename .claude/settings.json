@@ -4,7 +4,7 @@
     "vercel-aiagent-coding-skill": {
       "source": {
         "source": "github",
-        "repo": "FDE-project/vercel-aiagent-coding-skill"
+        "repo": "dentsu-fde/vercel-aiagent-coding-skill"
       }
     }
   },
