@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           # Node 20 は 2026-04 で EOL。engines (>=20.9) の範囲内で LTS の 24 を使う
           node-version: 24
